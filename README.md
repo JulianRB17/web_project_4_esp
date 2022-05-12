@@ -1,16 +1,16 @@
-# Project 4: Around The U.S.
+# Proyecto 4: Alrededor de los Estados Unidos
 
-### Overview
+### Descripción general
 
 * Figma
-* Images
+* Imágenes
 
 **Figma**
 
-* [Link to the project in Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
+* [Enlace al proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
 
-**Images**
+**Imágenes**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+A la hora de trabajar, debes optar por exportar las imágenes directamente desde Figma; te recomendamos hacerlo para practicar más. No olvides optimizarlas [aquí](https://tinypng.com/), para que tu proyecto cargue más rápido. 
 
-Have fun with JavaScript!
+¡Esperamos que te diviertas con JavaScript!
