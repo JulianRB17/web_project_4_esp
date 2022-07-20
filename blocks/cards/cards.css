@@ -4,7 +4,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 17px;
-  position: relative;
-  top: 46px;
+  padding-top: 46px;
   justify-content: center;
 }
