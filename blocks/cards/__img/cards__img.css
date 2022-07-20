@@ -1,0 +1,11 @@
+.cards__img {
+  height: 100%;
+  position: relative;
+  right: 15%;
+}
+
+.cards__img_vertical {
+  height: auto;
+  width: 100%;
+  right: 0%;
+}

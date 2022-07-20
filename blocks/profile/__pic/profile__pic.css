@@ -1,0 +1,6 @@
+.profile__pic {
+  background-image: url(../../../images/profile-pic.png);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
