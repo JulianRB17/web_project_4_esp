@@ -1,0 +1,9 @@
+.modal__input {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  width: 100%;
+  padding-bottom: 13px;
+}

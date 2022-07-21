@@ -11,6 +11,8 @@
   .profile__name {
     font-size: 22px;
     line-height: 26.6px;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
     align-self: center;
   }
 }

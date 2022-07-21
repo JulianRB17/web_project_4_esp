@@ -1,8 +1,12 @@
 .profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   color: white;
   width: 100%;
   padding-top: 40px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -14,7 +18,11 @@
 
 @media screen and (max-width: 650px) {
   .profile {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -ms-flex-line-pack: center;
     align-content: center;
   }
 }

@@ -5,7 +5,13 @@
   background-repeat: none;
   width: 21px;
   height: 19px;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
+}
+
+.cards__like-btn_active {
+  background-image: url(../../../images/like-btn-active.png);
 }
 
 .cards__like-btn:hover {
