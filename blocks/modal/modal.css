@@ -1,3 +1,7 @@
 .modal {
   display: none;
 }
+
+.modal_opened {
+  display: block;
+}

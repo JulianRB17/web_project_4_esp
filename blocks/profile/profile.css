@@ -16,7 +16,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 800px) {
   .profile {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

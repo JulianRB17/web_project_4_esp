@@ -1,30 +1,14 @@
 .profile__text-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: -webkit-max-content auto;
-  -ms-grid-columns: max-content auto;
-  grid-template-columns: -webkit-max-content auto;
-  grid-template-columns: max-content auto;
   margin: 0 auto 0 30px;
+  max-width: 500px;
 }
 
-@media screen and (max-width: 750px) {
-  .profile__text-container {
-    -ms-grid-columns: -webkit-min-content auto;
-    -ms-grid-columns: min-content auto;
-    grid-template-columns: -webkit-min-content auto;
-    grid-template-columns: min-content auto;
-  }
-}
-
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 800px) {
   .profile__text-container {
     margin: 0;
     text-align: center;
-    -ms-grid-columns: -webkit-max-content auto;
-    -ms-grid-columns: max-content auto;
-    grid-template-columns: -webkit-max-content auto;
-    grid-template-columns: max-content auto;
     padding-top: 26px;
   }
 }
