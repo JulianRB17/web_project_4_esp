@@ -1,16 +1,10 @@
-# Proyecto 4: Alrededor de los Estados Unidos
+# Proyecto 4: Alrededor de...
 
 ### Descripción general
 
-* Figma
-* Imágenes
+**Practicum: sprint 4**
 
-**Figma**
+Proyecto realizado para el sprint 4 del bootcamp en webdeveloping de Yandex: Practicum.
+[Página](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1) realizada con HTML, CSS y algunas bases de JavaScript.
 
-* [Enlace al proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
-
-**Imágenes**
-
-A la hora de trabajar, debes optar por exportar las imágenes directamente desde Figma; te recomendamos hacerlo para practicar más. No olvides optimizarlas [aquí](https://tinypng.com/), para que tu proyecto cargue más rápido. 
-
-¡Esperamos que te diviertas con JavaScript!
+Se le agregará mayor capacidad de intervención gracias a JavaScript en el futuro, por ejemplo, interacción con los botones de 'me gusta' en cada una de las imágenes.
