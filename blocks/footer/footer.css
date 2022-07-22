@@ -15,8 +15,7 @@
 
 @media screen and (max-width: 880px) {
   .footer {
-    position: relative;
-    left: 27px;
+    padding-left: 27px;
   }
 }
 
@@ -26,6 +25,6 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    left: 0;
+    padding-left: 0;
   }
 }

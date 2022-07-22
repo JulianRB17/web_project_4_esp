@@ -9,134 +9,124 @@
     <title>Around the U.S.</title>
   </head>
 
-  <body class="body">
-    <section class="modal">
-      <div class="modal__overlay"></div>
-      <div class="modal__body">
-        <button class="modal__close-btn"></button>
-        <h2 class="modal__title">Edit profile</h2>
-        <div class="modal__input-container">
-          <input
-            type="text"
-            class="modal__input modal__input_name"
-            value="Jacques Cousteau"
-          />
-          <div class="modal__input-underline"></div>
-          <input
-            type="text"
-            class="modal__input modal__input_about-me"
-            value="Explorador"
-          />
-          <div class="modal__input-underline"></div>
+  <body>
+    <div class="body-container">
+      <section class="modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__body">
+          <button class="modal__close-btn"></button>
+          <h2 class="modal__title">Edit profile</h2>
+          <div class="modal__input-container">
+            <input
+              type="text"
+              class="modal__input modal__input_name"
+              value="Jacques Cousteau"
+            />
+            <div class="modal__input-underline"></div>
+            <input
+              type="text"
+              class="modal__input modal__input_about-me"
+              value="Explorador"
+            />
+            <div class="modal__input-underline"></div>
+          </div>
+          <input type="submit" class="modal__save-btn" value="Guardar" />
         </div>
-        <input type="submit" class="modal__save-btn" value="Guardar" />
-      </div>
-    </section>
+      </section>
 
-    <header class="header">
-      <img src="images/logo.svg" class="header__logo" alt="Header logo" />
-      <div class="header__line-break"></div>
-    </header>
+      <header class="header">
+        <img src="images/logo.svg" class="header__logo" alt="Header logo" />
+        <div class="header__line-break"></div>
+      </header>
 
-    <section class="profile">
-      <div class="profile__pic"></div>
-      <div class="profile__text-container">
-        <h1 class="profile__name">Jacques Cousteau</h1>
-        <button class="profile__edit-btn"></button>
-        <p class="profile__about-me">Explorador</p>
-      </div>
-      <button class="profile__add-btn"></button>
-    </section>
+      <section class="profile">
+        <div class="profile__pic"></div>
+        <div class="profile__text-container">
+          <h1 class="profile__name">Jacques Cousteau</h1>
+          <button class="profile__edit-btn"></button>
+          <p class="profile__about-me">Explorador</p>
+        </div>
+        <button class="profile__add-btn"></button>
+      </section>
 
-    <section class="cards">
-      <div class="cards__card-container">
-        <div class="cards__img-container">
+      <section class="cards">
+        <div class="cards__card-container">
           <img
             class="cards__img"
             src="./images/cards_1.jpg"
             alt="Fotografía de cenote"
           />
+          <div class="cards__footer">
+            <h2 class="cards__name">Cenotes</h2>
+            <button class="cards__like-btn"></button>
+          </div>
         </div>
-        <div class="cards__footer">
-          <h2 class="cards__name">Cenotes</h2>
-          <button class="cards__like-btn"></button>
-        </div>
-      </div>
 
-      <div class="cards__card-container">
-        <div class="cards__img-container">
+        <div class="cards__card-container">
           <img
             class="cards__img cards__img_vertical"
             src="./images/cards_2.jpeg"
             alt="Fotografía de faro en Ushuaia"
           />
+          <div class="cards__footer">
+            <h2 class="cards__name">Ushuaia</h2>
+            <button class="cards__like-btn"></button>
+          </div>
         </div>
-        <div class="cards__footer">
-          <h2 class="cards__name">Ushuaia</h2>
-          <button class="cards__like-btn"></button>
-        </div>
-      </div>
 
-      <div class="cards__card-container">
-        <div class="cards__img-container">
+        <div class="cards__card-container">
           <img
             class="cards__img"
             src="./images/cards_3.jpeg"
             alt="Fotografía de cataratas de Iguazú"
           />
+          <div class="cards__footer">
+            <h2 class="cards__name">Cataratas de Iguazú</h2>
+            <button class="cards__like-btn"></button>
+          </div>
         </div>
-        <div class="cards__footer">
-          <h2 class="cards__name">Cataratas de Iguazú</h2>
-          <button class="cards__like-btn"></button>
-        </div>
-      </div>
 
-      <div class="cards__card-container">
-        <div class="cards__img-container">
+        <div class="cards__card-container">
           <img
             class="cards__img"
             src="./images/cards_4.jpg"
             alt="Fotografía de reflejo del cielo en el salar de Uyuni"
           />
+          <div class="cards__footer">
+            <h2 class="cards__name">Salar de Uyuni</h2>
+            <button class="cards__like-btn"></button>
+          </div>
         </div>
-        <div class="cards__footer">
-          <h2 class="cards__name">Salar de Uyuni</h2>
-          <button class="cards__like-btn"></button>
-        </div>
-      </div>
 
-      <div class="cards__card-container">
-        <div class="cards__img-container">
+        <div class="cards__card-container">
           <img
             class="cards__img"
             src="./images/cards_5.webp"
             alt="Fotografía de columpios en Bacalar"
           />
+          <div class="cards__footer">
+            <h2 class="cards__name">Bacalar o Laguna de 7 colores</h2>
+            <button class="cards__like-btn"></button>
+          </div>
         </div>
-        <div class="cards__footer">
-          <h2 class="cards__name">Bacalar o Laguna de 7 colores</h2>
-          <button class="cards__like-btn"></button>
-        </div>
-      </div>
 
-      <div class="cards__card-container">
-        <div class="cards__img-container">
+        <div class="cards__card-container">
           <img
             class="cards__img"
             src="./images/cards_6.jpg"
             alt="Fotografía del mar rosa de Las Coloradas"
           />
+          <div class="cards__footer">
+            <h2 class="cards__name">Las Coloradas</h2>
+            <button class="cards__like-btn"></button>
+          </div>
         </div>
-        <div class="cards__footer">
-          <h2 class="cards__name">Las Coloradas</h2>
-          <button class="cards__like-btn"></button>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <footer class="footer">
-      <p class="footer__copyright">© 2022 Alrededor de los EEUU</p>
-    </footer>
-    <script src="scripts/script.js"></script>
+      <footer class="footer">
+        <p class="footer__copyright">© 2022 Alrededor de los EEUU</p>
+      </footer>
+      <script src="scripts/script.js"></script>
+    </div>
   </body>
 </html>
