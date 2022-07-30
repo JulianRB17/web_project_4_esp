@@ -11,7 +11,7 @@
 
   <body>
     <div class="body-container">
-      <section class="modal">
+      <section class="modal" id="edit-profile">
         <div class="modal__overlay"></div>
         <div class="modal__body">
           <button class="modal__close-btn"></button>
@@ -19,18 +19,45 @@
           <div class="modal__input-container">
             <input
               type="text"
-              class="modal__input modal__input_name"
+              class="modal__input"
+              id="modal__input_name"
               value="Jacques Cousteau"
             />
             <div class="modal__input-underline"></div>
             <input
               type="text"
-              class="modal__input modal__input_about-me"
+              class="modal__input"
+              id="modal__input_about-me"
               value="Explorador"
             />
             <div class="modal__input-underline"></div>
           </div>
           <input type="submit" class="modal__save-btn" value="Guardar" />
+        </div>
+      </section>
+
+      <section class="modal" id="new-place">
+        <div class="modal__overlay"></div>
+        <div class="modal__body">
+          <button class="modal__close-btn"></button>
+          <h2 class="modal__title">Nuevo lugar</h2>
+          <div class="modal__input-container">
+            <input
+              type="text"
+              class="modal__input modal__input_empty"
+              value="Título"
+              id="modal__input_new-place-title"
+            />
+            <div class="modal__input-underline"></div>
+            <input
+              type="text"
+              class="modal__input modal__input_empty"
+              value="Enlace a la imagen"
+              id="modal__input_new-place-pic"
+            />
+            <div class="modal__input-underline"></div>
+          </div>
+          <input type="submit" class="modal__save-btn" value="Crear" />
         </div>
       </section>
 
