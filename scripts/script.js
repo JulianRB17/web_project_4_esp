@@ -89,7 +89,7 @@ function addCard(nameValue, linkValue) {
   card.querySelector(".cards__name").textContent = nameValue;
   cardImg.alt = nameValue;
   cardImg.src = linkValue;
-  document.querySelector(".cards").append(card);
+  document.querySelector(".cards").prepend(card);
   card;
 
   //Dar like a cada imagen
