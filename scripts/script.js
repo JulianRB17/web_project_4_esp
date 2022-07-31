@@ -10,6 +10,7 @@ const modalInputAboutMe = modal.querySelector("#modal__input_about-me");
 const modalNewPlace = document.querySelector("#new-place");
 const cardsTemplate = document.querySelector("#cards__template").content;
 const picModal = document.querySelector("#modal-pic");
+const profilePic = document.querySelector("#profile-pic");
 
 const openCloseModal = function (m) {
   m.classList.toggle("modal_opened");
@@ -119,9 +120,7 @@ function addCard(nameValue, linkValue) {
 //Cerrar ventana de imagen
 picModal
   .querySelector(".modal__close-btn")
-  .addEventListener("click", function () {
-    openCloseModal(picModal);
-  });
+  .addEventListener("click", () => openCloseModal(picModal));
 
 //Salvar datos de nuevo lugar
 modalNewPlace
@@ -144,6 +143,26 @@ modalNewPlace
       });
       openCloseModal(modalNewPlace);
     } else openCloseModal(modalNewPlace);
+  });
+
+//Abrir ventana de foto de perfil
+document
+  .querySelector(".profile__pic")
+  .addEventListener("click", () => openCloseModal(profilePic));
+
+//Cerrar ventana de foto de perfil
+profilePic
+  .querySelector(".modal__close-btn")
+  .addEventListener("click", () => openCloseModal(profilePic));
+
+//Salvar datos de ventana de foto de perfil
+profilePic
+  .querySelector(".modal__save-btn")
+  .addEventListener("click", function () {
+    document.querySelector(".profile__pic").style.backgroundImage = `url(${
+      profilePic.querySelector(".modal__input").value
+    })`;
+    openCloseModal(profilePic);
   });
 
 //Inicio

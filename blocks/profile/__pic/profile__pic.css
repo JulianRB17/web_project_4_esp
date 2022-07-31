@@ -3,4 +3,9 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
+  background-size: cover;
+}
+
+.profile__pic:hover {
+  cursor: pointer;
 }
