@@ -1,7 +1,12 @@
 .modal {
-  display: none;
+  z-index: 2;
+  visibility: hidden;
+  transition: visibility 0.5s, opacity 0.5s linear;
+  opacity: 0;
 }
 
 .modal_opened {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0.5s, opacity 0.5s linear;
 }

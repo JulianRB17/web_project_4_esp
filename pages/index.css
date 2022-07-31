@@ -14,6 +14,7 @@
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/cards/__card-container/cards__card-container.css);
+@import url(../blocks/cards/__trash-btn/cards__trash-btn.css);
 @import url(../blocks/cards/__img/cards__img.css);
 @import url(../blocks/cards/__footer/cards__footer.css);
 @import url(../blocks/cards/__name/cards__name.css);
@@ -22,6 +23,7 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/modal/modal.css);
 @import url(../blocks/modal/__overlay/modal__overlay.css);
+@import url(../blocks/modal/__pic-container/modal__pic-container.css);
 @import url(../blocks/modal/__close-btn/modal__close-btn.css);
 @import url(../blocks/modal/__body/modal__body.css);
 @import url(../blocks/modal/__title/modal__title.css);
@@ -29,3 +31,5 @@
 @import url(../blocks/modal/__input/modal__input.css);
 @import url(../blocks/modal/__input-underline/modal__input-underline.css);
 @import url(../blocks/modal/__save-btn/modal__save-btn.css);
+@import url(../blocks/modal/__pic/modal__pic.css);
+@import url(../blocks/modal/__pic-name/modal__pic-name.css);

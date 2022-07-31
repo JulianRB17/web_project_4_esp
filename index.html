@@ -21,6 +21,7 @@
               type="text"
               class="modal__input"
               id="modal__input_name"
+              placeholder="Nombre"
               value="Jacques Cousteau"
             />
             <div class="modal__input-underline"></div>
@@ -28,6 +29,7 @@
               type="text"
               class="modal__input"
               id="modal__input_about-me"
+              placeholder="Acerca de mí"
               value="Explorador"
             />
             <div class="modal__input-underline"></div>
@@ -44,20 +46,29 @@
           <div class="modal__input-container">
             <input
               type="text"
-              class="modal__input modal__input_empty"
-              value="Título"
+              class="modal__input"
+              placeholder="Título"
               id="modal__input_new-place-title"
             />
             <div class="modal__input-underline"></div>
             <input
               type="text"
-              class="modal__input modal__input_empty"
-              value="Enlace a la imagen"
+              class="modal__input"
+              placeholder="Enlace a la imagen"
               id="modal__input_new-place-pic"
             />
             <div class="modal__input-underline"></div>
           </div>
           <input type="submit" class="modal__save-btn" value="Crear" />
+        </div>
+      </section>
+
+      <section class="modal" id="modal-pic">
+        <div class="modal__overlay"></div>
+        <div class="modal__pic-container">
+          <button class="modal__close-btn"></button>
+          <img class="modal__pic" src="" alt="" />
+          <p class="modal__pic-name"></p>
         </div>
       </section>
 
@@ -77,77 +88,16 @@
       </section>
 
       <section class="cards">
-        <div class="cards__card-container">
-          <img
-            class="cards__img"
-            src="./images/cards_1.jpg"
-            alt="Fotografía de cenote"
-          />
-          <div class="cards__footer">
-            <h2 class="cards__name">Cenotes</h2>
-            <button class="cards__like-btn"></button>
+        <template id="cards__template">
+          <div class="cards__card-container">
+            <button class="cards__trash-btn"></button>
+            <img class="cards__img" alt="" src="" />
+            <div class="cards__footer">
+              <h2 class="cards__name"></h2>
+              <button class="cards__like-btn"></button>
+            </div>
           </div>
-        </div>
-
-        <div class="cards__card-container">
-          <img
-            class="cards__img cards__img_vertical"
-            src="./images/cards_2.jpeg"
-            alt="Fotografía de faro en Ushuaia"
-          />
-          <div class="cards__footer">
-            <h2 class="cards__name">Ushuaia</h2>
-            <button class="cards__like-btn"></button>
-          </div>
-        </div>
-
-        <div class="cards__card-container">
-          <img
-            class="cards__img"
-            src="./images/cards_3.jpeg"
-            alt="Fotografía de cataratas de Iguazú"
-          />
-          <div class="cards__footer">
-            <h2 class="cards__name">Cataratas de Iguazú</h2>
-            <button class="cards__like-btn"></button>
-          </div>
-        </div>
-
-        <div class="cards__card-container">
-          <img
-            class="cards__img"
-            src="./images/cards_4.jpg"
-            alt="Fotografía de reflejo del cielo en el salar de Uyuni"
-          />
-          <div class="cards__footer">
-            <h2 class="cards__name">Salar de Uyuni</h2>
-            <button class="cards__like-btn"></button>
-          </div>
-        </div>
-
-        <div class="cards__card-container">
-          <img
-            class="cards__img"
-            src="./images/cards_5.webp"
-            alt="Fotografía de columpios en Bacalar"
-          />
-          <div class="cards__footer">
-            <h2 class="cards__name">Bacalar o Laguna de 7 colores</h2>
-            <button class="cards__like-btn"></button>
-          </div>
-        </div>
-
-        <div class="cards__card-container">
-          <img
-            class="cards__img"
-            src="./images/cards_6.jpg"
-            alt="Fotografía del mar rosa de Las Coloradas"
-          />
-          <div class="cards__footer">
-            <h2 class="cards__name">Las Coloradas</h2>
-            <button class="cards__like-btn"></button>
-          </div>
-        </div>
+        </template>
       </section>
 
       <footer class="footer">

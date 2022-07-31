@@ -1,5 +1,5 @@
 .modal__body {
-  position: absolute;
+  position: fixed;
   width: 90%;
   min-width: 282px;
   max-width: 430px;
@@ -11,9 +11,9 @@
   z-index: 2;
   left: 50%;
   top: 50vh;
-  -webkit-transform: translate(-50%);
-  -ms-transform: translate(-50%);
-  transform: translate(-50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   padding: 34px;
   display: -webkit-box;
   display: -ms-flexbox;
