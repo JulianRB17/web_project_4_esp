@@ -9,8 +9,8 @@ const profileAboutMe = profile.querySelector(".profile__about-me");
 const modalInputAboutMe = modal.querySelector("#modal__input_about-me");
 const modalNewPlace = document.querySelector("#new-place");
 const cardsTemplate = document.querySelector("#cards__template").content;
-const picModal = document.querySelector("#modal-pic");
-const profilePic = document.querySelector("#profile-pic");
+const modalPic = document.querySelector("#modal-pic");
+const modalProfilePic = document.querySelector("#profile-pic");
 
 const openCloseModal = function (m) {
   m.classList.toggle("modal_opened");
@@ -59,12 +59,34 @@ modalProfile
     openCloseModal(modalProfile);
   });
 
+// Salvar datos en ventana modal
+
+const saveAndCloseModal = function (modalWindow, saveFunction) {
+  modalWindow
+    .querySelector(".modal__save-btn")
+    .addEventListener("click", function () {
+      saveFunction();
+      openCloseModal(modalWindow);
+    });
+  modalWindow.querySelectorAll("input").forEach((input) =>
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        saveFunction();
+        openCloseModal(modalWindow);
+      } else if (e.key === "Escape") {
+        openCloseModal(modalWindow);
+      }
+    })
+  );
+};
+
 //Salvar datos de edición de perfil
-modal.querySelector(".modal__save-btn").addEventListener("click", function () {
+const saveProfile = function () {
   profileName.textContent = modalInputName.value;
   profileAboutMe.textContent = modalInputAboutMe.value;
-  openCloseModal(modalProfile);
-});
+};
+
+saveAndCloseModal(modalProfile, saveProfile);
 
 //Abrir ventana de nuevo lugar
 profile
@@ -109,63 +131,56 @@ function addCard(nameValue, linkValue) {
   //Abrir imagen en modal
   card.querySelectorAll(".cards__img").forEach((pic) => {
     pic.addEventListener("click", function (evt) {
-      picModal.classList.add("modal_opened");
-      picModal.querySelector(".modal__pic").src = evt.target.src;
-      picModal.querySelector(".modal__pic").alt = evt.target.alt;
-      picModal.querySelector(".modal__pic-name").textContent = evt.target.alt;
+      modalPic.classList.add("modal_opened");
+      modalPic.querySelector(".modal__pic").src = evt.target.src;
+      modalPic.querySelector(".modal__pic").alt = evt.target.alt;
+      modalPic.querySelector(".modal__pic-name").textContent = evt.target.alt;
     });
   });
 }
 
-//Cerrar ventana de imagen
-picModal
-  .querySelector(".modal__close-btn")
-  .addEventListener("click", () => openCloseModal(picModal));
+//Cerrar ventana de imagen modal
+modalPic.querySelector(".modal__close-btn");
+modalPic.addEventListener("click", () => openCloseModal(modalPic));
 
 //Salvar datos de nuevo lugar
-modalNewPlace
-  .querySelector(".modal__save-btn")
-  .addEventListener("click", function () {
-    const newPlaceTitle = modalNewPlace.querySelector(
-      "#modal__input_new-place-title"
-    ).value;
+const saveNewPlace = function () {
+  const newPlaceTitle = modalNewPlace.querySelector(
+    "#modal__input_new-place-title"
+  ).value;
 
-    const newPlacePic = modalNewPlace.querySelector(
-      "#modal__input_new-place-pic"
-    ).value;
+  const newPlacePic = modalNewPlace.querySelector(
+    "#modal__input_new-place-pic"
+  ).value;
 
-    const inputs = modalNewPlace.querySelectorAll("input");
-
-    if (newPlacePic !== "" || newPlaceTitle !== "") {
-      addCard(newPlaceTitle, newPlacePic);
-      inputs.forEach((inputs) => {
-        inputs.value = "";
-      });
-      openCloseModal(modalNewPlace);
-    } else openCloseModal(modalNewPlace);
+  addCard(newPlaceTitle, newPlacePic);
+  modalNewPlace.querySelectorAll("input").forEach((inputs) => {
+    inputs.value = "";
   });
+};
+
+saveAndCloseModal(modalNewPlace, saveNewPlace);
 
 //Abrir ventana de foto de perfil
 document
   .querySelector(".profile__pic")
-  .addEventListener("click", () => openCloseModal(profilePic));
+  .addEventListener("click", () => openCloseModal(modalProfilePic));
 
 //Cerrar ventana de foto de perfil
-profilePic
+modalProfilePic
   .querySelector(".modal__close-btn")
-  .addEventListener("click", () => openCloseModal(profilePic));
+  .addEventListener("click", () => openCloseModal(modalProfilePic));
 
 //Salvar datos de ventana de foto de perfil
-profilePic
-  .querySelector(".modal__save-btn")
-  .addEventListener("click", function () {
-    document.querySelector(".profile__pic").style.backgroundImage = `url(${
-      profilePic.querySelector(".modal__input").value
-    })`;
-    openCloseModal(profilePic);
-  });
+const saveProfilePic = function () {
+  document.querySelector(".profile__pic").style.backgroundImage = `url(${
+    modalProfilePic.querySelector(".modal__input").value
+  })`;
+};
 
-//Inicio
+saveAndCloseModal(modalProfilePic, saveProfilePic);
+
+//Inicio con 6 tarjetas
 initialCards.forEach((e) => {
   addCard(e.name, e.link);
 });
