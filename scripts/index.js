@@ -1,5 +1,7 @@
 "use strict";
 
+import resetValidation from "./validate.js";
+
 const profile = document.querySelector(".profile");
 const modalProfile = document.querySelector("#edit-profile");
 const modal = document.querySelector(".modal");
@@ -11,10 +13,6 @@ const modalNewPlace = document.querySelector("#new-place");
 const cardsTemplate = document.querySelector("#cards__template").content;
 const modalPic = document.querySelector("#modal-pic");
 const modalProfilePic = document.querySelector("#profile-pic");
-
-const openCloseModal = function (m) {
-  m.classList.toggle("modal_opened");
-};
 
 const initialCards = [
   {
@@ -43,21 +41,37 @@ const initialCards = [
   },
 ];
 
-//Abrir ventana de edición de perfil
-profile
-  .querySelector(".profile__edit-btn")
-  .addEventListener("click", function () {
-    openCloseModal(modalProfile);
-    modalInputName.value = profileName.textContent;
-    modalInputAboutMe.value = profileAboutMe.textContent;
+const openCloseModal = function (m) {
+  m.classList.toggle("modal_opened");
+};
+
+//Resetear valores de los inputs
+const resetInputValues = (modalWindow) =>
+  modalWindow.querySelectorAll(".modal__input").forEach((inputElement) => {
+    inputElement.value = "";
   });
 
-//Cerrar ventana de edición de perfil
-modalProfile
-  .querySelector(".modal__close-btn")
-  .addEventListener("click", function () {
-    openCloseModal(modalProfile);
+//Cerrar ventanas modales
+const closeModal = function (modalWindow) {
+  modalWindow
+    .querySelector(".modal__close-btn")
+    .addEventListener("click", function () {
+      openCloseModal(modalWindow);
+      resetInputValues(modalWindow);
+    });
+  modalWindow.querySelector(".modal__overlay").addEventListener("click", () => {
+    {
+      openCloseModal(modalWindow);
+      resetInputValues(modalWindow);
+    }
   });
+  document.addEventListener("keydown", (key) => {
+    if (key.key === "Escape") {
+      modalWindow.classList.remove("modal_opened");
+      resetInputValues(modalWindow);
+    }
+  });
+};
 
 // Salvar datos en ventana modal
 
@@ -73,12 +87,23 @@ const saveAndCloseModal = function (modalWindow, saveFunction) {
       if (e.key === "Enter") {
         saveFunction();
         openCloseModal(modalWindow);
-      } else if (e.key === "Escape") {
-        openCloseModal(modalWindow);
       }
     })
   );
 };
+
+//Abrir ventana de edición de perfil
+profile
+  .querySelector(".profile__edit-btn")
+  .addEventListener("click", function () {
+    openCloseModal(modalProfile);
+    modalInputName.value = profileName.textContent;
+    modalInputAboutMe.value = profileAboutMe.textContent;
+    resetValidation(modalProfile);
+  });
+
+//Cerrar ventana de edición de perfil
+closeModal(modalProfile);
 
 //Salvar datos de edición de perfil
 const saveProfile = function () {
@@ -93,14 +118,11 @@ profile
   .querySelector(".profile__add-btn")
   .addEventListener("click", function () {
     openCloseModal(modalNewPlace);
+    resetValidation(modalNewPlace);
   });
 
 //Cerrar ventana de nuevo lugar
-modalNewPlace
-  .querySelector(".modal__close-btn")
-  .addEventListener("click", function () {
-    openCloseModal(modalNewPlace);
-  });
+closeModal(modalNewPlace);
 
 // Agregar carta de nuevo lugar
 function addCard(nameValue, linkValue) {
@@ -140,8 +162,7 @@ function addCard(nameValue, linkValue) {
 }
 
 //Cerrar ventana de imagen modal
-modalPic.querySelector(".modal__close-btn");
-modalPic.addEventListener("click", () => openCloseModal(modalPic));
+closeModal(modalPic);
 
 //Salvar datos de nuevo lugar
 const saveNewPlace = function () {
@@ -162,20 +183,28 @@ const saveNewPlace = function () {
 saveAndCloseModal(modalNewPlace, saveNewPlace);
 
 //Abrir ventana de foto de perfil
-document
-  .querySelector(".profile__pic")
-  .addEventListener("click", () => openCloseModal(modalProfilePic));
+document.querySelector(".profile__pic").addEventListener("click", () => {
+  openCloseModal(modalProfilePic);
+  resetValidation(modalProfilePic);
+});
 
 //Cerrar ventana de foto de perfil
-modalProfilePic
-  .querySelector(".modal__close-btn")
-  .addEventListener("click", () => openCloseModal(modalProfilePic));
+closeModal(modalProfilePic);
 
 //Salvar datos de ventana de foto de perfil
 const saveProfilePic = function () {
   document.querySelector(".profile__pic").style.backgroundImage = `url(${
-    modalProfilePic.querySelector(".modal__input").value
+    modalProfilePic.querySelector("#modal__input_profile-pic").value
   })`;
+  document
+    .querySelector(".profile__pic")
+    .setAttribute(
+      "alt",
+      `${
+        modalProfilePic.querySelector("#modal__input_profile-pic-description")
+          .value
+      }`
+    );
 };
 
 saveAndCloseModal(modalProfilePic, saveProfilePic);

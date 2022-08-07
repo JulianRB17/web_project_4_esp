@@ -7,3 +7,18 @@
   width: 100%;
   padding-bottom: 13px;
 }
+.modal__input:nth-of-type(2) {
+  margin-top: 30px;
+}
+
+.modal__input::-webkit-input-placeholder {
+  color: #cccccc;
+}
+
+.modal__input:-ms-input-placeholder {
+  color: #cccccc;
+}
+
+.modal__input::placeholder {
+  color: #cccccc;
+}

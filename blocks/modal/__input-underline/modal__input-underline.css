@@ -1,9 +1,10 @@
 .modal__input-underline {
   border-bottom: 1px solid #000000;
-  opacity: 0.5;
+  opacity: 0.2;
   width: 100%;
 }
 
-.modal__input-underline:first-of-type {
-  margin-bottom: 30px;
+.modal__input-underline_error {
+  border-color: #ff0000;
+  opacity: 1;
 }

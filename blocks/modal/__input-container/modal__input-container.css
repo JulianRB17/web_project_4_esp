@@ -4,8 +4,3 @@
   height: -moz-fit-content;
   height: fit-content;
 }
-
-.modal__input-container_single-element {
-  position: relative;
-  bottom: 15%;
-}

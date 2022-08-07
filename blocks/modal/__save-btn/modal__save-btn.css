@@ -13,6 +13,7 @@
   -webkit-transition: opacity 0.5s ease-in-out;
   -o-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
+  margin-top: 50px;
 }
 
 @media screen and (max-width: 440px) {
@@ -25,4 +26,19 @@
 .modal__save-btn:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.modal__save-btn_inactive {
+  border: 1px solid #000000;
+  color: #000000;
+  background-color: white;
+  opacity: 0.2;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.modal__save-btn_inactive:hover {
+  opacity: 0.2;
+  cursor: default;
 }
