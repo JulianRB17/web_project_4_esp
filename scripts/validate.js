@@ -7,7 +7,7 @@ const showInputError = (
   errorMessage,
   errorClass
 ) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   formElement
     .querySelector(`#${inputElement.id}-underline`)
     .classList.add("modal__input-underline_error");
