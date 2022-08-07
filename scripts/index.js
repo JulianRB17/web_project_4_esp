@@ -1,6 +1,6 @@
 "use strict";
 
-import resetValidation from "./validate.js";
+import { resetValidation } from "./validate.js";
 
 const profile = document.querySelector(".profile");
 const modalProfile = document.querySelector("#edit-profile");
