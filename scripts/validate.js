@@ -120,4 +120,4 @@ enableValidation({
 
 //Exportación de resetValidation
 
-export { resetValidation };
+//export { resetValidation };

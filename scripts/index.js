@@ -1,6 +1,6 @@
 "use strict";
 
-import { resetValidation } from "./validate.js";
+//import { resetValidation } from "./validate.js";
 
 const profile = document.querySelector(".profile");
 const modalProfile = document.querySelector("#edit-profile");
@@ -85,13 +85,13 @@ const saveAndCloseModal = function (modalWindow, saveFunction) {
     .querySelector(".modal__save-btn")
     .addEventListener("click", function () {
       saveFunction();
-      CloseModal(modalWindow);
+      closeModal(modalWindow);
     });
   modalWindow.querySelectorAll("input").forEach((input) =>
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
         saveFunction();
-        CloseModal(modalWindow);
+        closeModal(modalWindow);
       }
     })
   );
@@ -104,7 +104,7 @@ profile
     openModal(modalProfile);
     modalInputName.value = profileName.textContent;
     modalInputAboutMe.value = profileAboutMe.textContent;
-    resetValidation(modalProfile);
+    // resetValidation(modalProfile);
   });
 
 //Cerrar ventana de edición de perfil
@@ -123,7 +123,7 @@ profile
   .querySelector(".profile__add-btn")
   .addEventListener("click", function () {
     openModal(modalNewPlace);
-    resetValidation(modalNewPlace);
+    //resetValidation(modalNewPlace);
   });
 
 //Cerrar ventana de nuevo lugar
@@ -190,7 +190,7 @@ saveAndCloseModal(modalNewPlace, saveNewPlace);
 //Abrir ventana de foto de perfil
 document.querySelector(".profile__pic").addEventListener("click", () => {
   openModal(modalProfilePic);
-  resetValidation(modalProfilePic);
+  //resetValidation(modalProfilePic);
 });
 
 //Cerrar ventana de foto de perfil
