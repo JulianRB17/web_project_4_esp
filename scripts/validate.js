@@ -1,5 +1,3 @@
-"use strict";
-
 //Mostrar mensaje de error
 const showInputError = (
   formElement,

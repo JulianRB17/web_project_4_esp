@@ -41,8 +41,19 @@ const initialCards = [
   },
 ];
 
-const openCloseModal = function (m) {
-  m.classList.toggle("modal_opened");
+//Abrir ventana modal y agregar eventListener para escape una vez que esté abierta.
+
+const openModal = function (modalWindow) {
+  modalWindow.classList.add("modal_opened");
+  const escapeCloseModal = function (key) {
+    if (key.key === "Escape") {
+      modalWindow.classList.remove("modal_opened");
+      resetInputValues(modalWindow);
+      document.removeEventListener("keydown", escapeCloseModal);
+    }
+  };
+  document.addEventListener("keydown", escapeCloseModal);
+  resetInputValues(modalWindow);
 };
 
 //Resetear valores de los inputs
@@ -56,17 +67,11 @@ const closeModal = function (modalWindow) {
   modalWindow
     .querySelector(".modal__close-btn")
     .addEventListener("click", function () {
-      openCloseModal(modalWindow);
+      modalWindow.classList.remove("modal_opened");
       resetInputValues(modalWindow);
     });
   modalWindow.querySelector(".modal__overlay").addEventListener("click", () => {
     {
-      openCloseModal(modalWindow);
-      resetInputValues(modalWindow);
-    }
-  });
-  document.addEventListener("keydown", (key) => {
-    if (key.key === "Escape") {
       modalWindow.classList.remove("modal_opened");
       resetInputValues(modalWindow);
     }
@@ -80,13 +85,13 @@ const saveAndCloseModal = function (modalWindow, saveFunction) {
     .querySelector(".modal__save-btn")
     .addEventListener("click", function () {
       saveFunction();
-      openCloseModal(modalWindow);
+      CloseModal(modalWindow);
     });
   modalWindow.querySelectorAll("input").forEach((input) =>
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
         saveFunction();
-        openCloseModal(modalWindow);
+        CloseModal(modalWindow);
       }
     })
   );
@@ -96,7 +101,7 @@ const saveAndCloseModal = function (modalWindow, saveFunction) {
 profile
   .querySelector(".profile__edit-btn")
   .addEventListener("click", function () {
-    openCloseModal(modalProfile);
+    openModal(modalProfile);
     modalInputName.value = profileName.textContent;
     modalInputAboutMe.value = profileAboutMe.textContent;
     resetValidation(modalProfile);
@@ -117,7 +122,7 @@ saveAndCloseModal(modalProfile, saveProfile);
 profile
   .querySelector(".profile__add-btn")
   .addEventListener("click", function () {
-    openCloseModal(modalNewPlace);
+    openModal(modalNewPlace);
     resetValidation(modalNewPlace);
   });
 
@@ -153,7 +158,7 @@ function addCard(nameValue, linkValue) {
   //Abrir imagen en modal
   card.querySelectorAll(".cards__img").forEach((pic) => {
     pic.addEventListener("click", function (evt) {
-      modalPic.classList.add("modal_opened");
+      openModal(modalPic);
       modalPic.querySelector(".modal__pic").src = evt.target.src;
       modalPic.querySelector(".modal__pic").alt = evt.target.alt;
       modalPic.querySelector(".modal__pic-name").textContent = evt.target.alt;
@@ -184,7 +189,7 @@ saveAndCloseModal(modalNewPlace, saveNewPlace);
 
 //Abrir ventana de foto de perfil
 document.querySelector(".profile__pic").addEventListener("click", () => {
-  openCloseModal(modalProfilePic);
+  openModal(modalProfilePic);
   resetValidation(modalProfilePic);
 });
 
