@@ -1,3 +1,5 @@
+"use strict";
+
 //Mostrar mensaje de error
 const showInputError = (
   formElement,
@@ -21,13 +23,6 @@ const hideInputError = (formElement, inputElement, errorClass) => {
     .classList.remove("modal__input-underline_error");
   errorElement.textContent = "";
   errorElement.classList.remove(errorClass);
-};
-
-//Restablece la validación de formularios
-const resetValidation = (modalWindow) => {
-  modalWindow.querySelectorAll(".modal__input").forEach((inputElement) => {
-    hideInputError(modalWindow, inputElement, "modal__input-error_active");
-  });
 };
 
 //Verificar validez de datos en input para mostrar error
@@ -109,6 +104,17 @@ const enableValidation = ({
   });
 };
 
+//Restablece la validación de formularios
+const resetValidation = (modalWindow) => {
+  modalWindow.querySelectorAll(".modal__input").forEach((inputElement) => {
+    hideInputError(modalWindow, inputElement, "modal__input-error_active");
+  });
+  const inputList = Array.from(modalWindow.querySelectorAll("input"));
+  const buttonElement = modalWindow.querySelector(".modal__save-btn");
+  toggleSaveButtonState(inputList, buttonElement, "modal__save-btn_inactive");
+};
+
+//Llama a la validación de formularios
 enableValidation({
   formSelector: ".modal__input-container",
   inputSelector: ".modal__input",
@@ -118,6 +124,4 @@ enableValidation({
   errorClass: "modal__input-error_active",
 });
 
-//Exportación de resetValidation
-
-//export { resetValidation };
+export { resetValidation };

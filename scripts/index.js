@@ -1,6 +1,6 @@
 "use strict";
 
-//import { resetValidation } from "./validate.js";
+import { resetValidation } from "./validate.js";
 
 const profile = document.querySelector(".profile");
 const modalProfile = document.querySelector("#edit-profile");
@@ -41,20 +41,7 @@ const initialCards = [
   },
 ];
 
-//Abrir ventana modal y agregar eventListener para escape una vez que esté abierta.
-
-const openModal = function (modalWindow) {
-  modalWindow.classList.add("modal_opened");
-  const escapeCloseModal = function (key) {
-    if (key.key === "Escape") {
-      modalWindow.classList.remove("modal_opened");
-      resetInputValues(modalWindow);
-      document.removeEventListener("keydown", escapeCloseModal);
-    }
-  };
-  document.addEventListener("keydown", escapeCloseModal);
-  resetInputValues(modalWindow);
-};
+//BUG: por alguna razón no se salvan los datos de los inputs
 
 //Resetear valores de los inputs
 const resetInputValues = (modalWindow) =>
@@ -62,18 +49,35 @@ const resetInputValues = (modalWindow) =>
     inputElement.value = "";
   });
 
+//Abrir ventana modal y agregar eventListener para escape una vez que esté abierta.
+
+const openModal = function (modalWindow) {
+  modalWindow.classList.add("modal_opened");
+  const escapeCloseModal = function (e) {
+    if (e.key === "Escape") {
+      modalWindow.classList.remove("modal_opened");
+      resetInputValues(modalWindow);
+      document.removeEventListener("keydown", escapeCloseModal);
+    }
+  };
+  document.addEventListener("keydown", escapeCloseModal);
+};
+
 //Cerrar ventanas modales
 const closeModal = function (modalWindow) {
+  modalWindow.classList.remove("modal_opened");
+  resetInputValues(modalWindow);
+};
+
+const btnCloseModal = function (modalWindow) {
   modalWindow
     .querySelector(".modal__close-btn")
     .addEventListener("click", function () {
-      modalWindow.classList.remove("modal_opened");
-      resetInputValues(modalWindow);
+      closeModal(modalWindow);
     });
   modalWindow.querySelector(".modal__overlay").addEventListener("click", () => {
     {
-      modalWindow.classList.remove("modal_opened");
-      resetInputValues(modalWindow);
+      closeModal(modalWindow);
     }
   });
 };
@@ -81,18 +85,16 @@ const closeModal = function (modalWindow) {
 // Salvar datos en ventana modal
 
 const saveAndCloseModal = function (modalWindow, saveFunction) {
+  const saveAndClose = function () {
+    saveFunction();
+    closeModal(modalWindow);
+  };
   modalWindow
     .querySelector(".modal__save-btn")
-    .addEventListener("click", function () {
-      saveFunction();
-      closeModal(modalWindow);
-    });
+    .addEventListener("click", saveAndClose);
   modalWindow.querySelectorAll("input").forEach((input) =>
     input.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        saveFunction();
-        closeModal(modalWindow);
-      }
+      if (e.key === "Enter") saveAndClose;
     })
   );
 };
@@ -104,11 +106,11 @@ profile
     openModal(modalProfile);
     modalInputName.value = profileName.textContent;
     modalInputAboutMe.value = profileAboutMe.textContent;
-    // resetValidation(modalProfile);
+    resetValidation(modalProfile);
   });
 
 //Cerrar ventana de edición de perfil
-closeModal(modalProfile);
+btnCloseModal(modalProfile);
 
 //Salvar datos de edición de perfil
 const saveProfile = function () {
@@ -123,11 +125,11 @@ profile
   .querySelector(".profile__add-btn")
   .addEventListener("click", function () {
     openModal(modalNewPlace);
-    //resetValidation(modalNewPlace);
+    resetValidation(modalNewPlace);
   });
 
 //Cerrar ventana de nuevo lugar
-closeModal(modalNewPlace);
+btnCloseModal(modalNewPlace);
 
 // Agregar carta de nuevo lugar
 function addCard(nameValue, linkValue) {
@@ -139,7 +141,6 @@ function addCard(nameValue, linkValue) {
   cardImg.alt = nameValue;
   cardImg.src = linkValue;
   document.querySelector(".cards").prepend(card);
-  card;
 
   //Dar like a cada imagen
   card.querySelectorAll(".cards__like-btn").forEach((button) => {
@@ -167,7 +168,7 @@ function addCard(nameValue, linkValue) {
 }
 
 //Cerrar ventana de imagen modal
-closeModal(modalPic);
+btnCloseModal(modalPic);
 
 //Salvar datos de nuevo lugar
 const saveNewPlace = function () {
@@ -190,11 +191,11 @@ saveAndCloseModal(modalNewPlace, saveNewPlace);
 //Abrir ventana de foto de perfil
 document.querySelector(".profile__pic").addEventListener("click", () => {
   openModal(modalProfilePic);
-  //resetValidation(modalProfilePic);
+  resetValidation(modalProfilePic);
 });
 
 //Cerrar ventana de foto de perfil
-closeModal(modalProfilePic);
+btnCloseModal(modalProfilePic);
 
 //Salvar datos de ventana de foto de perfil
 const saveProfilePic = function () {
