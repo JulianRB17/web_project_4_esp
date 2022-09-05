@@ -9,27 +9,27 @@ import {
 const initialCards = [
   {
     name: "Cenotes",
-    link: "../images/cards_1.jpg",
+    link: "./images/cards_1.jpg",
   },
   {
     name: "Ushuaia",
-    link: "../images/cards_2.jpeg",
+    link: "./images/cards_2.jpeg",
   },
   {
     name: "Iguazú",
-    link: "../images/cards_3.jpeg",
+    link: "./images/cards_3.jpeg",
   },
   {
     name: "Uyuni",
-    link: "../images/cards_4.jpg",
+    link: "./images/cards_4.jpg",
   },
   {
     name: "Bacalar",
-    link: "../images/cards_5.webp",
+    link: "./images/cards_5.webp",
   },
   {
     name: "Las Coloradas",
-    link: "../images/cards_6.jpg",
+    link: "./images/cards_6.jpg",
   },
 ];
 
