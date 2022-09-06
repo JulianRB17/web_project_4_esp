@@ -35,10 +35,10 @@ const initialCards = [
 
 const cardsTemplate = document.querySelector("#cards__template").content;
 
-const profileModal = new ProfileModal();
-const newPlaceModal = new NewPlaceModal();
-const profilePicModal = new ProfilePicModal();
-const picModal = new PicModal();
+new ProfileModal();
+new NewPlaceModal();
+new ProfilePicModal();
+new PicModal();
 
 //Inicio con 6 tarjetas
 initialCards.forEach(function (initialCard) {
