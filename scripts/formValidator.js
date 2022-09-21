@@ -1,5 +1,5 @@
 export class FormValidator {
-  #modalWindow;
+  #popupWindow;
   #formSelector;
   #inputSelector;
   #submitButtonSelector;
@@ -10,7 +10,7 @@ export class FormValidator {
   #buttonElement;
 
   constructor(configObj, formElement) {
-    this.#modalWindow = formElement;
+    this.#popupWindow = formElement;
     this.#formSelector = configObj.formSelector;
     this.#inputSelector = configObj.inputSelector;
     this.#submitButtonSelector = configObj.submitButtonSelector;
@@ -19,11 +19,11 @@ export class FormValidator {
 
     // Selectores de form element, lista de inputs y botón de submit.
 
-    this.#formElement = this.#modalWindow.querySelector(this.#formSelector);
+    this.#formElement = this.#popupWindow.querySelector(this.#formSelector);
     this.#inputList = Array.from(
-      this.#modalWindow.querySelectorAll(this.#inputSelector)
+      this.#popupWindow.querySelectorAll(this.#inputSelector)
     );
-    this.#buttonElement = this.#modalWindow.querySelector(
+    this.#buttonElement = this.#popupWindow.querySelector(
       this.#submitButtonSelector
     );
 
@@ -32,24 +32,24 @@ export class FormValidator {
 
   //Mostrar mensaje de error
   _showInputError(inputElement) {
-    const errorElement = this.#modalWindow.querySelector(
+    const errorElement = this.#popupWindow.querySelector(
       `#${inputElement.id}-error`
     );
-    this.#modalWindow
+    this.#popupWindow
       .querySelector(`#${inputElement.id}-underline`)
-      .classList.add("modal__input-underline_error");
+      .classList.add("popup__input-underline_error");
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this.#errorClass);
   }
 
   //Ocultar mensaje de error
   _hideInputError(inputElement) {
-    const errorElement = this.#modalWindow.querySelector(
+    const errorElement = this.#popupWindow.querySelector(
       `#${inputElement.id}-error`
     );
-    this.#modalWindow
+    this.#popupWindow
       .querySelector(`#${inputElement.id}-underline`)
-      .classList.remove("modal__input-underline_error");
+      .classList.remove("popup__input-underline_error");
     errorElement.textContent = "";
     errorElement.classList.remove(this.#errorClass);
   }
@@ -83,18 +83,12 @@ export class FormValidator {
 
   //Seleccionar form y llamar a la modificación del botón, agrega un event listener a cada acción de "input" y a partir de la validez llama a modificar el botón.
   _setEventListeners() {
-    this._toggleSaveButtonState();
-    this.#inputList.forEach(
-      function (inputElement) {
-        inputElement.addEventListener(
-          "input",
-          function () {
-            this._checkInputValidity(inputElement);
-            this._toggleSaveButtonState();
-          }.bind(this)
-        );
-      }.bind(this)
-    );
+    this.#inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this._checkInputValidity(inputElement);
+        this._toggleSaveButtonState();
+      });
+    });
   }
 
   //Detona la validación en cada form
@@ -107,11 +101,9 @@ export class FormValidator {
 
   //Restablece la validación de formularios
   resetValidation() {
-    this.#inputList.forEach(
-      function (inputElement) {
-        this._hideInputError(inputElement);
-      }.bind(this)
-    );
+    this.#inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
     this._toggleSaveButtonState();
   }
 }

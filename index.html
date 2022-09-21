@@ -11,16 +11,16 @@
 
   <body>
     <div class="body-container">
-      <section class="modal" id="edit-profile">
-        <div class="modal__overlay"></div>
-        <div class="modal__body">
-          <button class="modal__close-btn"></button>
-          <h2 class="modal__title">Edit profile</h2>
-          <form class="modal__input-container">
+      <section class="popup" id="edit-profile">
+        <div class="popup__overlay"></div>
+        <div class="popup__body">
+          <button class="popup__close-btn"></button>
+          <h2 class="popup__title">Edit profile</h2>
+          <form class="popup__input-container">
             <input
               type="text"
-              class="modal__input modal__input_error"
-              id="modal__input_name"
+              class="popup__input popup__input_error"
+              id="popup__input_name"
               placeholder="Nombre"
               value="Jacques Cousteau"
               required
@@ -28,14 +28,14 @@
               maxlength="40"
             />
             <div
-              class="modal__input-underline"
-              id="modal__input_name-underline"
+              class="popup__input-underline"
+              id="popup__input_name-underline"
             ></div>
-            <span class="modal__error-msg" id="modal__input_name-error"></span>
+            <span class="popup__error-msg" id="popup__input_name-error"></span>
             <input
               type="text"
-              class="modal__input modal__input_error"
-              id="modal__input_about-me"
+              class="popup__input popup__input_error"
+              id="popup__input_about-me"
               placeholder="Acerca de mí"
               value="Explorador"
               required
@@ -43,112 +43,112 @@
               maxlength="200"
             />
             <div
-              class="modal__input-underline"
-              id="modal__input_about-me-underline"
+              class="popup__input-underline"
+              id="popup__input_about-me-underline"
             ></div>
             <span
-              class="modal__error-msg"
-              id="modal__input_about-me-error"
+              class="popup__error-msg"
+              id="popup__input_about-me-error"
             ></span>
-            <button class="modal__save-btn" type="submit">Guardar</button>
+            <button class="popup__save-btn" type="submit">Guardar</button>
           </form>
         </div>
       </section>
 
-      <section class="modal" id="new-place">
-        <div class="modal__overlay"></div>
-        <div class="modal__body">
-          <button class="modal__close-btn"></button>
-          <h2 class="modal__title">Nuevo lugar</h2>
-          <form class="modal__input-container">
+      <section class="popup" id="new-place">
+        <div class="popup__overlay"></div>
+        <div class="popup__body">
+          <button class="popup__close-btn"></button>
+          <h2 class="popup__title">Nuevo lugar</h2>
+          <form class="popup__input-container">
             <input
               type="text"
-              class="modal__input modal__input_error"
+              class="popup__input popup__input_error"
               placeholder="Título"
-              id="modal__input_new-place-title"
+              id="popup__input_new-place-title"
               required
               minlength="2"
               maxlength="30"
             />
             <div
-              class="modal__input-underline"
-              id="modal__input_new-place-title-underline"
+              class="popup__input-underline"
+              id="popup__input_new-place-title-underline"
             ></div>
             <span
-              class="modal__error-msg"
-              id="modal__input_new-place-title-error"
+              class="popup__error-msg"
+              id="popup__input_new-place-title-error"
             ></span>
             <input
               type="url"
-              class="modal__input modal__input_error"
+              class="popup__input popup__input_error"
               placeholder="Enlace a la imagen"
-              id="modal__input_new-place-pic"
+              id="popup__input_new-place-pic"
               required
             />
             <div
-              class="modal__input-underline"
-              id="modal__input_new-place-pic-underline"
+              class="popup__input-underline"
+              id="popup__input_new-place-pic-underline"
             ></div>
             <span
-              class="modal__error-msg"
-              id="modal__input_new-place-pic-error"
+              class="popup__error-msg"
+              id="popup__input_new-place-pic-error"
             ></span>
-            <button class="modal__save-btn" type="submit">Crear</button>
+            <button class="popup__save-btn" type="submit">Crear</button>
           </form>
         </div>
       </section>
 
-      <section class="modal" id="modal-pic">
-        <div class="modal__overlay"></div>
-        <div class="modal__pic-container">
-          <button class="modal__close-btn"></button>
+      <section class="popup" id="popup-pic">
+        <div class="popup__overlay"></div>
+        <div class="popup__pic-container">
+          <button class="popup__close-btn"></button>
           <img
-            class="modal__pic"
+            class="popup__pic"
             src="./images/cards_1.jpg"
             alt="...Cargando imagen"
           />
-          <p class="modal__pic-name"></p>
+          <p class="popup__pic-name"></p>
         </div>
       </section>
 
-      <section class="modal" id="profile-pic">
-        <div class="modal__overlay"></div>
-        <div class="modal__body">
-          <button class="modal__close-btn"></button>
-          <h2 class="modal__title">Change profile pic</h2>
-          <form class="modal__input-container">
+      <section class="popup" id="profile-pic">
+        <div class="popup__overlay"></div>
+        <div class="popup__body">
+          <button class="popup__close-btn"></button>
+          <h2 class="popup__title">Change profile pic</h2>
+          <form class="popup__input-container">
             <input
               type="text"
-              class="modal__input modal__input_error"
+              class="popup__input popup__input_error"
               placeholder="Descripción de imagen"
-              id="modal__input_profile-pic-description"
+              id="popup__input_profile-pic-description"
               minlength="2"
               maxlength="50"
             />
             <div
-              class="modal__input-underline"
-              id="modal__input_profile-pic-description-underline"
+              class="popup__input-underline"
+              id="popup__input_profile-pic-description-underline"
             ></div>
             <span
-              class="modal__error-msg"
-              id="modal__input_profile-pic-description-error"
+              class="popup__error-msg"
+              id="popup__input_profile-pic-description-error"
             ></span>
             <input
               type="url"
-              class="modal__input modal__input_error"
+              class="popup__input popup__input_error"
               placeholder="Enlace a la imagen"
-              id="modal__input_profile-pic"
+              id="popup__input_profile-pic"
               required
             />
             <div
-              class="modal__input-underline"
-              id="modal__input_profile-pic-underline"
+              class="popup__input-underline"
+              id="popup__input_profile-pic-underline"
             ></div>
             <span
-              class="modal__error-msg"
-              id="modal__input_profile-pic-error"
+              class="popup__error-msg"
+              id="popup__input_profile-pic-error"
             ></span>
-            <button class="modal__save-btn" type="submit">Guardar</button>
+            <button class="popup__save-btn" type="submit">Guardar</button>
           </form>
         </div>
       </section>

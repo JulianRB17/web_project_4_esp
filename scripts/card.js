@@ -1,28 +1,39 @@
-export class Card {
-  #nameValue;
-  #linkValue;
-  #card;
-  #newCard;
+import { popupWithImage } from "../src/index.js";
+import { Section } from "./Section.js";
 
+export class Card {
   constructor(nameValue, linkValue, template) {
-    this.#nameValue = nameValue;
-    this.#linkValue = linkValue;
-    this.#card = template.querySelector(".cards__card-container");
+    this._nameValue = nameValue;
+    this._linkValue = linkValue;
+    this._card = template.querySelector(".cards__card-container");
+    popupWithImage._handleCardClick();
   }
 
   // Agregar carta de nuevo lugar
   addCard() {
-    this.#newCard = this.#card.cloneNode(true);
-    this.#newCard.querySelector(".cards__name").textContent = this.#nameValue;
-    this.#newCard.querySelector(".cards__img").alt = this.#nameValue;
-    this.#newCard.querySelector(".cards__img").src = this.#linkValue;
-    this._toggleLikeBtn(this.#newCard);
-    this._eraseCard(this.#newCard);
-    return document.querySelector(".cards").prepend(this.#newCard);
+    const newCardSection = new Section(
+      {
+        items: [this._newCard],
+        renderer: function () {
+          this._newCard = this._card.cloneNode(true);
+          this._newCard.querySelector(".cards__name").textContent =
+            this._nameValue;
+          this._newCard.querySelector(".cards__img").alt = this._nameValue;
+          this._newCard.querySelector(".cards__img").src = this._linkValue;
+          this._toggleLikeBtn(this._newCard);
+          this._eraseCard(this._newCard);
+        }.bind(this),
+      },
+      document.querySelector(".cards")
+    );
+
+    newCardSection.renderItem();
+
+    return newCardSection.addItem(this._newCard);
   }
 
   _toggleLikeBtn() {
-    this.#newCard
+    this._newCard
       .querySelector(".cards__like-btn")
       .addEventListener("click", (likeButton) => {
         likeButton.target.classList.toggle("cards__like-btn_active");
@@ -30,7 +41,7 @@ export class Card {
   }
 
   _eraseCard() {
-    this.#newCard
+    this._newCard
       .querySelector(".cards__trash-btn")
       .addEventListener("click", (trashBtn) =>
         trashBtn.target.closest(".cards__card-container").remove()
