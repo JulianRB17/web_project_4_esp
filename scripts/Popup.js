@@ -39,18 +39,4 @@ export class Popup {
         }
       });
   }
-
-  // Salvar datos en ventana popup
-  // _saveAndClosePopup(saveFunction) {
-  //   const saveAndClose = () => {
-  //     saveFunction();
-  //     this._closePopup();
-  //   };
-
-  //   this._popupWindow
-  //     .querySelector(".popup__save-btn")
-  //     .addEventListener("click", function () {
-  //       saveAndClose();
-  //     });
-  // }
 }

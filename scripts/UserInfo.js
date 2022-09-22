@@ -1,4 +1,4 @@
-export class UserInfo {
+class UserInfo {
   constructor({ userName, userJob }) {
     this._userName = userName;
     this._userJob = userJob;
@@ -18,3 +18,7 @@ export class UserInfo {
     inputProfileAboutMe.value = this._userJob;
   }
 }
+
+export const newUserInfo = function (data) {
+  return new UserInfo(data);
+};

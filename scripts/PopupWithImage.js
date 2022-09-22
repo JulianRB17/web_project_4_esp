@@ -5,6 +5,7 @@ export class PopupWithImage extends Popup {
   constructor() {
     super(popupPic);
     super._setEventListeners();
+    this._handleCardClick();
   }
 
   // Agrega el eventListener para abrir la popup de imagen

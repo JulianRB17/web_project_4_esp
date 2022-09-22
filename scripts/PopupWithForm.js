@@ -1,26 +1,18 @@
 import { Popup } from "./Popup.js";
-import { FormValidator } from "./FormValidator.js";
-import { UserInfo } from "./UserInfo.js";
-import { Card } from "./Card.js";
-
-export const cardsTemplate = document.querySelector("#cards__template").content;
+import { newFormValidator } from "./FormValidator.js";
+import { newUserInfo } from "./UserInfo.js";
+import { newCard } from "./Section.js";
 
 export class PopupWithForms extends Popup {
-  #formValidator;
-  #userInfo = new UserInfo({
+  _userInfo = newUserInfo({
     userName: "Jacques Cousteau",
     userJob: "Explorador",
   });
-  #card;
-
-  #popupProfile = document.querySelector("#edit-profile");
-  #popupNewPlace = document.querySelector("#new-place");
-  #popupProfilePic = document.querySelector("#profile-pic");
 
   constructor(popupWindow) {
     super(popupWindow);
     this._setEventListeners();
-    this.#formValidator = new FormValidator(
+    this._formValidator = newFormValidator(
       {
         formSelector: ".popup__input-container",
         inputSelector: ".popup__input",
@@ -30,28 +22,31 @@ export class PopupWithForms extends Popup {
       },
       this._popupWindow
     );
+    this._popupProfile = document.querySelector("#edit-profile");
+    this._popupNewPlace = document.querySelector("#new-place");
+    this._popupProfilePic = document.querySelector("#profile-pic");
   }
 
   // Abre ventana popup
   openPopup() {
     super._openPopup();
-    this.#formValidator.resetValidation();
-    this.#userInfo.setUserInfo();
+    this._formValidator.resetValidation();
+    this._userInfo.setUserInfo();
   }
 
   // Toma los datos de input de las ventanas popups y los almacena
   _getInputValues() {
-    if (this._popupWindow === this.#popupProfile) {
+    if (this._popupWindow === this._popupProfile) {
       this._popupInputName = document.querySelector("#popup__input_name").value;
       this._popupInputAboutMe = document.querySelector(
         "#popup__input_about-me"
       ).value;
-      this.#userInfo = new UserInfo({
+      this._userInfo = newUserInfo({
         userName: this._popupInputName,
         userJob: this._popupInputAboutMe,
       });
     }
-    if (this._popupWindow === this.#popupNewPlace) {
+    if (this._popupWindow === this._popupNewPlace) {
       this._popupInputNewPlacePic = document.querySelector(
         "#popup__input_new-place-pic"
       ).value;
@@ -59,7 +54,7 @@ export class PopupWithForms extends Popup {
         "#popup__input_new-place-title"
       ).value;
     }
-    if (this._popupWindow === this.#popupProfilePic) {
+    if (this._popupWindow === this._popupProfilePic) {
       this._popupInputProfilePic = document.querySelector(
         "#popup__input_profile-pic"
       ).value;
@@ -75,23 +70,24 @@ export class PopupWithForms extends Popup {
       this._getInputValues();
       this._closePopup();
 
-      if (this._popupWindow === this.#popupNewPlace) {
-        this.#card = new Card(
-          this._popupInputnewPlaceTitle,
-          this._popupInputNewPlacePic,
-          cardsTemplate
-        );
-        this.#card.addCard();
+      if (this._popupWindow === this._popupNewPlace) {
+        this._card = newCard([
+          {
+            nameValue: this._popupInputnewPlaceTitle,
+            linkValue: this._popupInputNewPlacePic,
+          },
+        ]);
+        this._card.renderItem();
       }
 
-      if (this._popupWindow === this.#popupProfile) {
+      if (this._popupWindow === this._popupProfile) {
         const profileName = document.querySelector(".profile__name");
         const profileAboutMe = document.querySelector(".profile__about-me");
-        profileName.textContent = this.#userInfo._userName;
-        profileAboutMe.textContent = this.#userInfo._userJob;
+        profileName.textContent = this._userInfo._userName;
+        profileAboutMe.textContent = this._userInfo._userJob;
       }
 
-      if (this._popupWindow === this.#popupProfilePic) {
+      if (this._popupWindow === this._popupProfilePic) {
         const profilePic = document.querySelector(".profile__pic");
         profilePic.style.backgroundImage = `url(${this._popupInputProfilePic})`;
         profilePic.setAttribute(
@@ -106,7 +102,7 @@ export class PopupWithForms extends Popup {
   // Cierra ventana popup
   _closePopup() {
     super._closePopup();
-    if (this._popupWindow === this.#popupProfile) return;
+    if (this._popupWindow === this._popupProfile) return;
     this._popupWindow
       .querySelectorAll(".popup__input")
       .forEach((inputElement) => {

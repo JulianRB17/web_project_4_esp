@@ -15,3 +15,24 @@ export class Section {
     this._container.prepend(item);
   }
 }
+
+// Creación de nuevas tarjetas
+export const newCard = function (dataArray) {
+  return new Section(
+    {
+      items: dataArray,
+      renderer: function (data) {
+        // console.log(this);
+        const { nameValue, linkValue } = data;
+        const newCard = document
+          .querySelector("#cards__template")
+          .content.cloneNode(true);
+        newCard.querySelector(".cards__name").textContent = nameValue;
+        newCard.querySelector(".cards__img").alt = nameValue;
+        newCard.querySelector(".cards__img").src = linkValue;
+        this.addItem(newCard);
+      },
+    },
+    document.querySelector(".cards")
+  );
+};

@@ -1,30 +1,19 @@
-export class FormValidator {
-  #popupWindow;
-  #formSelector;
-  #inputSelector;
-  #submitButtonSelector;
-  #inactiveButtonClass;
-  #errorClass;
-  #formElement;
-  #inputList;
-  #buttonElement;
-
+class FormValidator {
   constructor(configObj, formElement) {
-    this.#popupWindow = formElement;
-    this.#formSelector = configObj.formSelector;
-    this.#inputSelector = configObj.inputSelector;
-    this.#submitButtonSelector = configObj.submitButtonSelector;
-    this.#inactiveButtonClass = configObj.inactiveButtonClass;
-    this.#errorClass = configObj.errorClass;
+    this._popupWindow = formElement;
+    this._formSelector = configObj.formSelector;
+    this._inputSelector = configObj.inputSelector;
+    this._submitButtonSelector = configObj.submitButtonSelector;
+    this._inactiveButtonClass = configObj.inactiveButtonClass;
+    this._errorClass = configObj.errorClass;
 
     // Selectores de form element, lista de inputs y botón de submit.
-
-    this.#formElement = this.#popupWindow.querySelector(this.#formSelector);
-    this.#inputList = Array.from(
-      this.#popupWindow.querySelectorAll(this.#inputSelector)
+    this._formElement = this._popupWindow.querySelector(this._formSelector);
+    this._inputList = Array.from(
+      this._popupWindow.querySelectorAll(this._inputSelector)
     );
-    this.#buttonElement = this.#popupWindow.querySelector(
-      this.#submitButtonSelector
+    this._buttonElement = this._popupWindow.querySelector(
+      this._submitButtonSelector
     );
 
     this._enableValidation();
@@ -32,31 +21,31 @@ export class FormValidator {
 
   //Mostrar mensaje de error
   _showInputError(inputElement) {
-    const errorElement = this.#popupWindow.querySelector(
+    const errorElement = this._popupWindow.querySelector(
       `#${inputElement.id}-error`
     );
-    this.#popupWindow
+    this._popupWindow
       .querySelector(`#${inputElement.id}-underline`)
       .classList.add("popup__input-underline_error");
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add(this.#errorClass);
+    errorElement.classList.add(this._errorClass);
   }
 
   //Ocultar mensaje de error
   _hideInputError(inputElement) {
-    const errorElement = this.#popupWindow.querySelector(
+    const errorElement = this._popupWindow.querySelector(
       `#${inputElement.id}-error`
     );
-    this.#popupWindow
+    this._popupWindow
       .querySelector(`#${inputElement.id}-underline`)
       .classList.remove("popup__input-underline_error");
     errorElement.textContent = "";
-    errorElement.classList.remove(this.#errorClass);
+    errorElement.classList.remove(this._errorClass);
   }
 
   // Determinar si un elemento input del form no es válido
   _hasInvalidInput() {
-    return this.#inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
@@ -72,18 +61,18 @@ export class FormValidator {
 
   //Modificar botón dependiendo de validez de form
   _toggleSaveButtonState() {
-    if (this._hasInvalidInput(this.#inputList)) {
-      this.#buttonElement.classList.add(this.#inactiveButtonClass);
-      this.#buttonElement.setAttribute("disabled", "");
+    if (this._hasInvalidInput(this._inputList)) {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.setAttribute("disabled", "");
     } else {
-      this.#buttonElement.classList.remove(this.#inactiveButtonClass);
-      this.#buttonElement.removeAttribute("disabled", "");
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.removeAttribute("disabled", "");
     }
   }
 
   //Seleccionar form y llamar a la modificación del botón, agrega un event listener a cada acción de "input" y a partir de la validez llama a modificar el botón.
   _setEventListeners() {
-    this.#inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleSaveButtonState();
@@ -93,7 +82,7 @@ export class FormValidator {
 
   //Detona la validación en cada form
   _enableValidation() {
-    this.#formElement.addEventListener("submit", function (evt) {
+    this._formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
     this._setEventListeners();
@@ -101,9 +90,13 @@ export class FormValidator {
 
   //Restablece la validación de formularios
   resetValidation() {
-    this.#inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
     this._toggleSaveButtonState();
   }
 }
+
+export const newFormValidator = function (configObj, formElement) {
+  return new FormValidator(configObj, formElement);
+};
