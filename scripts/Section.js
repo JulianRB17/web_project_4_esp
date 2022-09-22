@@ -6,7 +6,7 @@ export class Section {
   }
 
   // renderiza elementos de un array
-  renderItem() {
+  renderItems() {
     this._items.forEach((item) => this._renderer(item));
   }
 
@@ -17,7 +17,7 @@ export class Section {
 }
 
 // Creación de nuevas tarjetas
-export const newCard = function (dataArray) {
+export const newCards = function (dataArray) {
   return new Section(
     {
       items: dataArray,

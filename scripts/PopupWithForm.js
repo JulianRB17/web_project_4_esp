@@ -1,7 +1,7 @@
 import { Popup } from "./Popup.js";
 import { newFormValidator } from "./FormValidator.js";
 import { newUserInfo } from "./UserInfo.js";
-import { newCard } from "./Section.js";
+import { newCards } from "./Section.js";
 
 export class PopupWithForms extends Popup {
   _userInfo = newUserInfo({
@@ -71,13 +71,13 @@ export class PopupWithForms extends Popup {
       this._closePopup();
 
       if (this._popupWindow === this._popupNewPlace) {
-        this._card = newCard([
+        this._card = newCards([
           {
             nameValue: this._popupInputnewPlaceTitle,
             linkValue: this._popupInputNewPlacePic,
           },
         ]);
-        this._card.renderItem();
+        this._card.renderItems();
       }
 
       if (this._popupWindow === this._popupProfile) {
