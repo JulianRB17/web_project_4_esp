@@ -1,16 +1,3 @@
-import "../vendor/normalize.css";
-import "./index.css";
-
-import img1 from "../images/cards_1.jpg";
-import img2 from "../images/cards_2.jpg";
-import img3 from "../images/cards_3.jpg";
-import img4 from "../images/cards_4.jpg";
-import img5 from "../images/cards_5.jpg";
-import img6 from "../images/cards_6.jpg";
-import logoImg from "../images/logo.svg";
-
-document.querySelector(".header__logo").src = logoImg;
-
 import { Card } from "../scripts/Card.js";
 import { PopupWithImage } from "../scripts/PopupWithImage.js";
 import { PopupWithForms } from "../scripts/PopupWithForm.js";
@@ -19,27 +6,27 @@ import { newCards } from "../scripts/Section.js";
 const initialCards = [
   {
     nameValue: "Cenotes",
-    linkValue: img1,
+    linkValue: "./images/cards_1.jpg",
   },
   {
     nameValue: "Ushuaia",
-    linkValue: img2,
+    linkValue: "./images/cards_2.jpg",
   },
   {
     nameValue: "Iguazú",
-    linkValue: img3,
+    linkValue: "./images/cards_3.jpg",
   },
   {
     nameValue: "Uyuni",
-    linkValue: img4,
+    linkValue: "./images/cards_4.jpg",
   },
   {
     nameValue: "Bacalar",
-    linkValue: img5,
+    linkValue: "./images/cards_5.jpg",
   },
   {
     nameValue: "Las Coloradas",
-    linkValue: img6,
+    linkValue: "./images/cards_6.jpg",
   },
 ];
 
