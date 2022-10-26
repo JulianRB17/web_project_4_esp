@@ -27,14 +27,12 @@ export class PopupWithForms extends Popup {
     this._card = card;
   }
 
-  // Abre ventana popup
   openPopup() {
     super._openPopup();
     this._formValidator.resetValidation();
     this._userInfo.setUserInfo();
   }
 
-  // Toma los datos de input de las ventanas popups y los almacena
   _getInputValues() {
     if (this._popupWindow === this._popupProfile) {
       this._popupInputName = document.querySelector("#popup__input_name").value;
@@ -60,7 +58,6 @@ export class PopupWithForms extends Popup {
     }
   }
 
-  // Agrega los eventListeners de submit de la ventana popup
   _setEventListeners() {
     this._popupWindow.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -127,7 +124,6 @@ export class PopupWithForms extends Popup {
     super._setEventListeners();
   }
 
-  // Cierra ventana popup
   _closePopup() {
     super._closePopup();
     if (this._popupWindow === this._popupProfile) return;

@@ -7,7 +7,6 @@ class FormValidator {
     this._inactiveButtonClass = configObj.inactiveButtonClass;
     this._errorClass = configObj.errorClass;
 
-    // Selectores de form element, lista de inputs y botón de submit.
     this._formElement = this._popupWindow.querySelector(this._formSelector);
     this._inputList = Array.from(
       this._popupWindow.querySelectorAll(this._inputSelector)
@@ -19,7 +18,6 @@ class FormValidator {
     this._enableValidation();
   }
 
-  //Mostrar mensaje de error
   _showInputError(inputElement) {
     const errorElement = this._popupWindow.querySelector(
       `#${inputElement.id}-error`
@@ -31,7 +29,6 @@ class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-  //Ocultar mensaje de error
   _hideInputError(inputElement) {
     const errorElement = this._popupWindow.querySelector(
       `#${inputElement.id}-error`
@@ -43,14 +40,12 @@ class FormValidator {
     errorElement.classList.remove(this._errorClass);
   }
 
-  // Determinar si un elemento input del form no es válido
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  //Verificar validez de datos en input para mostrar error
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
@@ -59,7 +54,6 @@ class FormValidator {
     }
   }
 
-  //Modificar botón dependiendo de validez de form
   _toggleSaveButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -70,7 +64,6 @@ class FormValidator {
     }
   }
 
-  //Seleccionar form y llamar a la modificación del botón, agrega un event listener a cada acción de "input" y a partir de la validez llama a modificar el botón.
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -80,7 +73,6 @@ class FormValidator {
     });
   }
 
-  //Detona la validación en cada form
   _enableValidation() {
     this._formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
@@ -88,7 +80,6 @@ class FormValidator {
     this._setEventListeners();
   }
 
-  //Restablece la validación de formularios
   resetValidation() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);

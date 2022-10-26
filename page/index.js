@@ -45,7 +45,6 @@ export const popupEraseCard = function (element) {
 };
 const cardHandler = new Card();
 
-// Agregar eventListeners a los botones que abren cada ventana popup
 document.querySelector(".profile__edit-btn").addEventListener("click", () => {
   popupProfile.openPopup();
 });

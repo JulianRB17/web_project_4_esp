@@ -8,7 +8,6 @@ export class PopupWithImage extends Popup {
     this._handleCardClick();
   }
 
-  // Agrega el eventListener para abrir la popup de imagen
   _handleCardClick() {
     document.querySelector(".cards").addEventListener("click", (e) => {
       const img = e.target.closest(".cards__img");

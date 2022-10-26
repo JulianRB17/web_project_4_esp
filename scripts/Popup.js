@@ -1,4 +1,3 @@
-// Clase padre de las ventanas popupes
 export class Popup {
   constructor(popupWindow) {
     this._popupWindow = popupWindow;
