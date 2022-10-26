@@ -26,3 +26,10 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+
+.popup__body_medium {
+  height: 272px;
+}
+.popup__body_small {
+  height: 181px;
+}

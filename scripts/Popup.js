@@ -4,13 +4,11 @@ export class Popup {
     this._popupWindow = popupWindow;
   }
 
-  //Abrir ventana popup y agregar eventListener para cerrar con escape.
   _openPopup() {
     this._popupWindow.classList.add("popup_opened");
     this._handleEscClose();
   }
 
-  //Cerrar ventanas popupes
   _closePopup() {
     this._popupWindow.classList.remove("popup_opened");
   }

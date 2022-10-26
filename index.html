@@ -50,6 +50,7 @@
               class="popup__error-msg"
               id="popup__input_about-me-error"
             ></span>
+
             <button class="popup__save-btn" type="submit">Guardar</button>
           </form>
         </div>
@@ -113,26 +114,10 @@
 
       <section class="popup" id="profile-pic">
         <div class="popup__overlay"></div>
-        <div class="popup__body">
+        <div class="popup__body popup__body_medium">
           <button class="popup__close-btn"></button>
-          <h2 class="popup__title">Change profile pic</h2>
+          <h2 class="popup__title">Cambiar foto de perfil</h2>
           <form class="popup__input-container">
-            <input
-              type="text"
-              class="popup__input popup__input_error"
-              placeholder="Descripción de imagen"
-              id="popup__input_profile-pic-description"
-              minlength="2"
-              maxlength="50"
-            />
-            <div
-              class="popup__input-underline"
-              id="popup__input_profile-pic-description-underline"
-            ></div>
-            <span
-              class="popup__error-msg"
-              id="popup__input_profile-pic-description-error"
-            ></span>
             <input
               type="url"
               class="popup__input popup__input_error"
@@ -153,17 +138,32 @@
         </div>
       </section>
 
+      <section class="popup" id="popup-erase-card">
+        <div class="popup__overlay"></div>
+        <div class="popup__body popup__body_small">
+          <button class="popup__close-btn"></button>
+          <h2 class="popup__title" type="submit">¿Estás seguro?</h2>
+          <form class="popup__input-container">
+            <button class="popup__save-btn">Sí</button>
+          </form>
+        </div>
+      </section>
+
       <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="Header logo" />
         <div class="header__line-break"></div>
       </header>
 
       <section class="profile">
-        <div class="profile__pic"></div>
+        <div class="profile__pic">
+          <div class="profile__overlay">
+            <div class="profile__overlay-icon"></div>
+          </div>
+        </div>
         <div class="profile__text-container">
-          <h1 class="profile__name">Jacques Cousteau</h1>
+          <h1 class="profile__name"></h1>
           <button class="profile__edit-btn"></button>
-          <p class="profile__about-me">Explorador</p>
+          <p class="profile__about-me"></p>
         </div>
         <button class="profile__add-btn"></button>
       </section>
@@ -178,8 +178,11 @@
               alt="...Cargando imagen"
             />
             <div class="cards__footer">
-              <h2 class="cards__name"></h2>
-              <button class="cards__like-btn"></button>
+              <h2 class="cards__name">imagen 1</h2>
+              <div class="cards__like-container">
+                <button class="cards__like-btn"></button>
+                <p class="cards__like-number"></p>
+              </div>
             </div>
           </div>
         </template>

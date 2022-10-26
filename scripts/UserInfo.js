@@ -1,24 +1,39 @@
+import { newUserInfoApi } from "./Api.js";
+
 class UserInfo {
-  constructor({ userName, userJob }) {
-    this._userName = userName;
-    this._userJob = userJob;
-  }
-  // Almacena los datos de la popup de edición de perfil
-  getUserInfo() {
-    return { name: this._userName, job: this._userJob };
+  constructor() {
+    this.getUserInfo();
   }
 
-  // Coloca los datos de edición de perfil en la popup respectiva cuando se abre
+  getUserInfo() {
+    return newUserInfoApi.getData().then((data) => {
+      this.userName = data.name;
+      this.userAbout = data.about;
+      this.avatar = data.avatar;
+      this._id = data._id;
+      document.querySelector(".profile__name").textContent = data.name;
+      document.querySelector(".profile__about-me").textContent = data.about;
+      document.querySelector(
+        ".profile__pic"
+      ).style.backgroundImage = `url(${data.avatar})`;
+      return this;
+    });
+  }
+
   setUserInfo() {
-    const inputProfileName = document.querySelector("#popup__input_name");
-    const inputProfileAboutMe = document.querySelector(
-      "#popup__input_about-me"
-    );
-    inputProfileName.value = this._userName;
-    inputProfileAboutMe.value = this._userJob;
+    this.getUserInfo().then((data) => {
+      const inputProfileName = document.querySelector("#popup__input_name");
+      const inputProfileAboutMe = document.querySelector(
+        "#popup__input_about-me"
+      );
+      const inputProfilePic = document.querySelector(
+        "#popup__input_profile-pic"
+      );
+      inputProfileName.value = this.userName;
+      inputProfileAboutMe.value = this.userAbout;
+      inputProfilePic.value = this.avatar;
+    });
   }
 }
 
-export const newUserInfo = function (data) {
-  return new UserInfo(data);
-};
+export const newUserInfo = new UserInfo();
