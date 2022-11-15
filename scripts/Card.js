@@ -1,5 +1,5 @@
 import { popupEraseCard } from "../page/index.js";
-import { cardLikeBtnApi } from "./Api.js";
+import { apiHandler } from "./Api.js";
 
 export class Card {
   constructor() {
@@ -11,8 +11,8 @@ export class Card {
     document.querySelector(".cards").addEventListener("click", (e) => {
       if (e.target.classList.contains("cards__like-btn")) {
         e.target.classList.toggle("cards__like-btn_active");
-        cardLikeBtnApi(e)
-          .getData()
+        apiHandler
+          .toggleLikeBtn(e.target)
           .then(
             (data) =>
               (e.target
@@ -25,10 +25,14 @@ export class Card {
   }
 
   _eraseCard() {
-    document.querySelector(".cards").addEventListener("click", (e) => {
+    const eraseEvent = function (e) {
       if (e.target.classList.contains("cards__trash-btn")) {
         popupEraseCard(e.target).openPopup();
       }
+    };
+
+    document.querySelector(".cards").addEventListener("click", (e) => {
+      eraseEvent(e);
     });
   }
 }

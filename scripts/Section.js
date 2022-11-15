@@ -1,3 +1,5 @@
+import { newUserInfo } from "./UserInfo.js";
+
 export class Section {
   constructor({ items, renderer }, container) {
     this._items = items;
@@ -18,34 +20,39 @@ export class Section {
   }
 }
 
-export const newCards = function (dataArray, userData) {
+export const newCards = function (dataArray) {
   return new Section(
     {
       items: dataArray,
       renderer: function ({ name, link, _id, owner, likes = [] }) {
-        const newCard = document
-          .querySelector("#cards__template")
-          .content.cloneNode(true);
-        newCard.querySelector(".cards__name").textContent = name;
-        newCard.querySelector(".cards__img").alt = name;
-        newCard.querySelector(".cards__img").src = link;
-        newCard.querySelector(".cards__like-number").textContent = likes.length;
-        newCard.querySelector(".cards__card-container").id = _id;
-        if (userData._id !== owner._id) {
-          newCard.querySelector(".cards__trash-btn").style.display = "none";
-        }
-        likes.forEach((like) => {
-          if (like._id === userData._id) {
-            newCard
-              .querySelector(".cards__like-btn")
-              .classList.add("cards__like-btn_active");
+        newUserInfo.getUserInfo().then((userInfo) => {
+          const newCard = document
+            .querySelector("#cards__template")
+            .content.cloneNode(true);
+          newCard.querySelector(".cards__name").textContent = name;
+          newCard.querySelector(".cards__img").alt = name;
+          newCard.querySelector(".cards__img").src = link;
+          newCard.querySelector(".cards__like-number").textContent =
+            likes.length;
+          newCard.querySelector(".cards__card-container").id = _id;
+
+          if (userInfo._id !== owner._id) {
+            newCard.querySelector(".cards__trash-btn").style.display = "none";
+          }
+          likes.forEach((like) => {
+            if (like._id === userInfo._id) {
+              newCard
+                .querySelector(".cards__like-btn")
+                .classList.add("cards__like-btn_active");
+            }
+          });
+
+          if (dataArray.length > 1) {
+            this.addInitItem(newCard);
+          } else {
+            this.addItem(newCard);
           }
         });
-        if (dataArray.length > 1) {
-          this.addInitItem(newCard);
-        } else {
-          this.addItem(newCard);
-        }
       },
     },
     document.querySelector(".cards")

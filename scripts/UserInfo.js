@@ -1,4 +1,4 @@
-import { newUserInfoApi } from "./Api.js";
+import { apiHandler } from "./Api.js";
 
 class UserInfo {
   constructor() {
@@ -6,17 +6,13 @@ class UserInfo {
   }
 
   getUserInfo() {
-    return newUserInfoApi.getData().then((data) => {
-      this.userName = data.name;
-      this.userAbout = data.about;
-      this.avatar = data.avatar;
-      this._id = data._id;
+    return apiHandler.getUserInfo().then((data) => {
       document.querySelector(".profile__name").textContent = data.name;
       document.querySelector(".profile__about-me").textContent = data.about;
       document.querySelector(
         ".profile__pic"
       ).style.backgroundImage = `url(${data.avatar})`;
-      return this;
+      return data;
     });
   }
 
@@ -29,9 +25,9 @@ class UserInfo {
       const inputProfilePic = document.querySelector(
         "#popup__input_profile-pic"
       );
-      inputProfileName.value = this.userName;
-      inputProfileAboutMe.value = this.userAbout;
-      inputProfilePic.value = this.avatar;
+      inputProfileName.value = data.name;
+      inputProfileAboutMe.value = data.about;
+      inputProfilePic.value = data.avatar;
     });
   }
 }

@@ -2,11 +2,11 @@ import { Popup } from "./Popup.js";
 import { newFormValidator } from "./FormValidator.js";
 import { newUserInfo } from "./UserInfo.js";
 import { newCards } from "./Section.js";
-import { changeUserInfoApi, setNewPlaceApi, setProfilePic } from "./Api.js";
-import { eraseCardApi } from "./Api.js";
+// import { changeUserInfoApi, setNewPlaceApi, setProfilePic } from "./Api.js";
+// import { eraseCardApi } from "./Api.js";
+import { apiHandler } from "./Api.js";
 
 export class PopupWithForms extends Popup {
-  _userInfo = newUserInfo;
   constructor(popupWindow, card) {
     super(popupWindow);
     this._setEventListeners();
@@ -30,7 +30,7 @@ export class PopupWithForms extends Popup {
   openPopup() {
     super._openPopup();
     this._formValidator.resetValidation();
-    this._userInfo.setUserInfo();
+    newUserInfo.setUserInfo();
   }
 
   _getInputValues() {
@@ -39,8 +39,8 @@ export class PopupWithForms extends Popup {
       this._popupInputAboutMe = document.querySelector(
         "#popup__input_about-me"
       ).value;
-      this._userInfo.name = this._popupInputName;
-      this._userInfo.about = this._popupInputAboutMe;
+      newUserInfo.name = this._popupInputName;
+      newUserInfo.about = this._popupInputAboutMe;
     }
 
     if (this._popupWindow === this._popupNewPlace) {
@@ -66,10 +66,10 @@ export class PopupWithForms extends Popup {
         "Guardando...";
 
       if (this._popupWindow === this._popupNewPlace) {
-        setNewPlaceApi(this)
-          .getData()
+        apiHandler
+          .setNewPlace(this)
           .then((data) => {
-            this._card = newCards([data], this._userInfo).renderItems();
+            this._card = newCards([data], newUserInfo).renderItems();
           })
           .catch((err) => console.log(err))
           .finally((data) => {
@@ -82,10 +82,10 @@ export class PopupWithForms extends Popup {
       if (this._popupWindow === this._popupProfile) {
         const profileName = document.querySelector(".profile__name");
         const profileAboutMe = document.querySelector(".profile__about-me");
-        profileName.textContent = this._userInfo.name;
-        profileAboutMe.textContent = this._userInfo.about;
-        changeUserInfoApi(this)
-          .getData()
+        profileName.textContent = newUserInfo.name;
+        profileAboutMe.textContent = newUserInfo.about;
+        apiHandler
+          .changeUserInfo(this)
           .catch((err) => console.log(err))
           .finally((data) => {
             this._closePopup();
@@ -96,8 +96,8 @@ export class PopupWithForms extends Popup {
 
       if (this._popupWindow === this._popupProfilePic) {
         const profilePic = document.querySelector(".profile__pic");
-        setProfilePic(this._popupInputProfilePic)
-          .getData()
+        apiHandler
+          .setProfilePic(this._popupInputProfilePic)
           .then(
             (data) => (profilePic.style.backgroundImage = `url(${data.avatar})`)
           )
@@ -110,9 +110,9 @@ export class PopupWithForms extends Popup {
       }
 
       if (this._popupWindow === this._popupEraseCard) {
-        this._card.closest(".cards__card-container").remove();
-        eraseCardApi(this._card)
-          .getData()
+        this._card?.closest(".cards__card-container").remove();
+        apiHandler
+          .deleteCard(this._card)
           .catch((err) => console.log(err))
           .finally((data) => {
             this._closePopup();
@@ -126,7 +126,6 @@ export class PopupWithForms extends Popup {
 
   _closePopup() {
     super._closePopup();
-    if (this._popupWindow === this._popupProfile) return;
     this._popupWindow
       .querySelectorAll(".popup__input")
       .forEach((inputElement) => {
