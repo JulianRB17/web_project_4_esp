@@ -3,7 +3,7 @@ export class Popup {
     this._popupWindow = popupWindow;
   }
 
-  _openPopup() {
+  openPopup() {
     this._popupWindow.classList.add("popup_opened");
     this._handleEscClose();
   }
@@ -15,7 +15,7 @@ export class Popup {
   _handleEscClose() {
     const escapeClosePopup = (e) => {
       if (e.key === "Escape") {
-        this._popupWindow.classList.remove("popup_opened");
+        this._closePopup();
         document.removeEventListener("keydown", escapeClosePopup);
       }
     };

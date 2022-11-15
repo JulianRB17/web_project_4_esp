@@ -2,8 +2,6 @@ import { Popup } from "./Popup.js";
 import { newFormValidator } from "./FormValidator.js";
 import { newUserInfo } from "./UserInfo.js";
 import { newCards } from "./Section.js";
-// import { changeUserInfoApi, setNewPlaceApi, setProfilePic } from "./Api.js";
-// import { eraseCardApi } from "./Api.js";
 import { apiHandler } from "./Api.js";
 
 export class PopupWithForms extends Popup {
@@ -23,12 +21,11 @@ export class PopupWithForms extends Popup {
     this._popupProfile = document.querySelector("#edit-profile");
     this._popupNewPlace = document.querySelector("#new-place");
     this._popupProfilePic = document.querySelector("#profile-pic");
-    this._popupEraseCard = document.querySelector("#popup-erase-card");
     this._card = card;
   }
 
   openPopup() {
-    super._openPopup();
+    super.openPopup();
     this._formValidator.resetValidation();
     newUserInfo.setUserInfo();
   }
@@ -106,18 +103,6 @@ export class PopupWithForms extends Popup {
             this._closePopup();
             this._popupWindow.querySelector(".popup__save-btn").textContent =
               "Guardar";
-          });
-      }
-
-      if (this._popupWindow === this._popupEraseCard) {
-        this._card?.closest(".cards__card-container").remove();
-        apiHandler
-          .deleteCard(this._card)
-          .catch((err) => console.log(err))
-          .finally((data) => {
-            this._closePopup();
-            this._popupWindow.querySelector(".popup__save-btn").textContent =
-              "Sí";
           });
       }
     });

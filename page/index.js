@@ -3,7 +3,7 @@ import { PopupWithImage } from "../scripts/PopupWithImage.js";
 import { PopupWithForms } from "../scripts/PopupWithForm.js";
 import { apiHandler } from "../scripts/Api.js";
 import { newCards } from "../scripts/Section.js";
-import { newUserInfo } from "../scripts/UserInfo.js";
+// import { newUserInfo } from "../scripts/UserInfo.js";
 
 import "../vendor/normalize.css";
 import "./index.css";
@@ -22,12 +22,7 @@ const popupProfilePic = new PopupWithForms(
 const popupProfile = new PopupWithForms(
   document.querySelector("#edit-profile")
 );
-export const popupEraseCard = function (element) {
-  return new PopupWithForms(
-    document.querySelector("#popup-erase-card"),
-    element
-  );
-};
+
 const cardHandler = new Card();
 
 document.querySelector(".profile__edit-btn").addEventListener("click", () => {
