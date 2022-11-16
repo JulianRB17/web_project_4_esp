@@ -11,20 +11,20 @@ class Api {
     this._options = options;
   }
 
-  _getData() {
-    return fetch(this._baseUrl + this._specificUrl, this._options).then(
-      (res) => {
+  _fetchData() {
+    return fetch(this._baseUrl + this._specificUrl, this._options)
+      .then((res) => {
         if (res.ok) return res.json();
         return Promise.reject(`Error: ${res.status}`);
-      }
-    );
+      })
+      .catch((error) => console.error(error));
   }
 
   getUserInfo() {
     this._specificUrl = "users/me";
     this._options.method = "GET";
     delete this._options.body;
-    return this._getData();
+    return this._fetchData();
   }
 
   toggleLikeBtn(likeBtn) {
@@ -34,7 +34,7 @@ class Api {
       ? "PUT"
       : "DELETE";
     delete this._options.body;
-    return this._getData();
+    return this._fetchData();
   }
 
   deleteCard(trashBtn) {
@@ -42,7 +42,7 @@ class Api {
     this._specificUrl = `/cards/${card.id} `;
     this._options.method = "DELETE";
     delete this._options.body;
-    return this._getData();
+    return this._fetchData();
   }
 
   setNewPlace(data) {
@@ -52,7 +52,7 @@ class Api {
       name: data._popupInputnewPlaceTitle,
       link: data._popupInputNewPlacePic,
     });
-    return this._getData();
+    return this._fetchData();
   }
 
   changeUserInfo(data) {
@@ -62,14 +62,14 @@ class Api {
         name: data._popupInputName,
         about: data._popupInputAboutMe,
       }));
-    return this._getData();
+    return this._fetchData();
   }
 
   getInitialCards() {
     this._specificUrl = "cards";
     this._options.method = "GET";
     delete this._options._body;
-    return this._getData();
+    return this._fetchData();
   }
 
   setInitialCards() {
@@ -89,7 +89,7 @@ class Api {
     this._specificUrl = "users/me/avatar";
     this._options.method = "PATCH";
     this._options.body = JSON.stringify({ avatar: data });
-    return this._getData();
+    return this._fetchData();
   }
 }
 

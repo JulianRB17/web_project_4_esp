@@ -2,6 +2,7 @@ import { Popup } from "./Popup.js";
 import { apiHandler } from "./Api.js";
 
 const popupEraseCardWindow = document.querySelector("#popup-erase-card");
+
 class PopupWithConfirmation extends Popup {
   constructor(trashBtn) {
     super(popupEraseCardWindow);
