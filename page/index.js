@@ -6,11 +6,11 @@ import { newCards } from "../scripts/Section.js";
 import "../vendor/normalize.css";
 import "./index.css";
 
-import logoImg from "../images/logo.svg";
+// import logoImg from "../images/logo.svg";
 
 apiHandler.getInitialCards().then((cards) => newCards(cards).renderItems());
 
-document.querySelector(".header__logo").src = logoImg;
+// document.querySelector(".header__logo").src = logoImg;
 
 const popupNewPlace = new PopupWithForms(document.querySelector("#new-place"));
 const popupProfilePic = new PopupWithForms(
