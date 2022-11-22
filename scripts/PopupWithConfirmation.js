@@ -4,12 +4,16 @@ import { apiHandler } from "./Api.js";
 const popupEraseCardWindow = document.querySelector("#popup-erase-card");
 
 class PopupWithConfirmation extends Popup {
-  constructor(trashBtn) {
+  constructor() {
     super(popupEraseCardWindow);
     this._popupEraseCardWindow = popupEraseCardWindow;
-    this._card = trashBtn.closest(".cards__card-container");
     this._setEventListeners();
     super._setEventListeners();
+  }
+
+  openPopup(trashBtn) {
+    super.openPopup();
+    this._card = trashBtn.closest(".cards__card-container");
   }
 
   _setEventListeners() {
@@ -35,6 +39,4 @@ class PopupWithConfirmation extends Popup {
   }
 }
 
-export const popupEraseCard = function (trashBtn) {
-  return new PopupWithConfirmation(trashBtn);
-};
+export const newPopupWithConfirmation = new PopupWithConfirmation();
