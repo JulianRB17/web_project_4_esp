@@ -1,12 +1,11 @@
-import { apiHandler } from "./Api.js";
-
-class UserInfo {
-  constructor() {
+export class UserInfo {
+  constructor(apiHandler) {
+    this._apiHandler = apiHandler;
     this.getUserInfo();
   }
 
   getUserInfo() {
-    return apiHandler
+    return this._apiHandler
       .getUserInfo()
       .then((data) => {
         document.querySelector(".profile__name").textContent = data.name;
@@ -36,5 +35,3 @@ class UserInfo {
       .catch((error) => console.error(error));
   }
 }
-
-export const newUserInfo = new UserInfo();

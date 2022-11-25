@@ -15,7 +15,7 @@ class FormValidator {
       this._submitButtonSelector
     );
 
-    this._enableValidation();
+    this.enableValidation();
   }
 
   _showInputError(inputElement) {
@@ -73,7 +73,7 @@ class FormValidator {
     });
   }
 
-  _enableValidation() {
+  enableValidation() {
     this._formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });

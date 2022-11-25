@@ -1,7 +1,7 @@
 .cards__like-btn {
   background: none;
   border: none;
-  background-image: url(../../../images/cards-like.jpg);
+  background-image: url(../../../../images/cards-like.jpg);
   background-repeat: no-repeat;
   width: 21px;
   height: 19px;
@@ -11,7 +11,7 @@
 }
 
 .cards__like-btn_active {
-  background-image: url(../../../images/like-btn-active.png);
+  background-image: url(../../../../images/like-btn-active.png);
 }
 
 .cards__like-btn:hover {
