@@ -6,6 +6,7 @@ class FormValidator {
     this._submitButtonSelector = configObj.submitButtonSelector;
     this._inactiveButtonClass = configObj.inactiveButtonClass;
     this._errorClass = configObj.errorClass;
+    this._underlineErrorClass = configObj.underlineErrorClass;
 
     this._formElement = this._popupWindow.querySelector(this._formSelector);
     this._inputList = Array.from(
@@ -24,7 +25,7 @@ class FormValidator {
     );
     this._popupWindow
       .querySelector(`#${inputElement.id}-underline`)
-      .classList.add("popup__input-underline_error");
+      .classList.add(this._underlineErrorClass);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
   }
@@ -35,7 +36,7 @@ class FormValidator {
     );
     this._popupWindow
       .querySelector(`#${inputElement.id}-underline`)
-      .classList.remove("popup__input-underline_error");
+      .classList.remove(this._underlineErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove(this._errorClass);
   }

@@ -1,14 +1,12 @@
 import { Popup } from "./Popup.js";
 
-const popupEraseCardWindow = document.querySelector("#popup-erase-card");
-
 export class PopupWithConfirmation extends Popup {
-  constructor(apiHandler) {
-    super(popupEraseCardWindow);
-    this._popupEraseCardWindow = popupEraseCardWindow;
+  constructor(onEraseCard, popupEraseCardSelector) {
+    super(popupEraseCardSelector);
+    this._popupEraseCardSelector = popupEraseCardSelector;
     this._setEventListeners();
     super._setEventListeners();
-    this._apiHandler = apiHandler;
+    this._onEraseCard = onEraseCard;
   }
 
   openPopup(trashBtn) {
@@ -17,24 +15,12 @@ export class PopupWithConfirmation extends Popup {
   }
 
   _setEventListeners() {
-    this._popupEraseCardWindow.addEventListener("submit", (e) => {
+    this._popupEraseCardSelector.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._popupEraseCardWindow.querySelector(".popup__save-btn").textContent =
-        "Guardando...";
-      this._eraseCard();
+      this._popupEraseCardSelector.querySelector(
+        ".popup__save-btn"
+      ).textContent = "Guardando...";
+      this._onEraseCard();
     });
-  }
-
-  _eraseCard() {
-    this._card.remove();
-    this._apiHandler
-      .deleteCard(this._card)
-      .catch((err) => console.log(err))
-      .finally(() => {
-        this._closePopup();
-        this._popupEraseCardWindow.querySelector(
-          ".popup__save-btn"
-        ).textContent = "Sí";
-      });
   }
 }

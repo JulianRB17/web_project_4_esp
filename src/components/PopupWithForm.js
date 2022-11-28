@@ -1,9 +1,9 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithForms extends Popup {
-  constructor(popupWindow, userInfo, apiHandler, newFormValidator, newCard) {
+  constructor(popupWindow, newFormValidator, onSubmit) {
     super(popupWindow);
-    this._setEventListeners();
+    this._onSubmit = onSubmit;
     this._formValidator = newFormValidator(
       {
         formSelector: ".popup__input-container",
@@ -11,102 +11,45 @@ export class PopupWithForms extends Popup {
         submitButtonSelector: ".popup__save-btn",
         inactiveButtonClass: "popup__save-btn_inactive",
         errorClass: "popup__input-error_active",
+        underlineErrorClass: "popup__input-underline_error",
       },
       this._popupWindow
     );
-    this._popupProfile = document.querySelector("#edit-profile");
-    this._popupNewPlace = document.querySelector("#new-place");
-    this._popupProfilePic = document.querySelector("#profile-pic");
-    this._userInfo = userInfo;
-    this._apiHandler = apiHandler;
-    this._newCard = newCard;
+    this._setEventListeners();
   }
 
   openPopup() {
     super.openPopup();
     this._formValidator.resetValidation();
-    this._userInfo.setUserInfo();
+    this._setInputValues();
   }
 
   _getInputValues() {
-    if (this._popupWindow === this._popupProfile) {
-      this._popupInputName = document.querySelector("#popup__input_name").value;
-      this._popupInputAboutMe = document.querySelector(
-        "#popup__input_about-me"
-      ).value;
-      this._userInfo.name = this._popupInputName;
-      this._userInfo.about = this._popupInputAboutMe;
-    }
+    return {
+      name: document.querySelector("#popup__input_name").value,
+      about: document.querySelector("#popup__input_about-me").value,
+      newPlace: document.querySelector("#popup__input_new-place-pic").value,
+      newPlaceCaption: document.querySelector("#popup__input_new-place-title")
+        .value,
+      avatar: document.querySelector("#popup__input_profile-pic").value,
+    };
+  }
 
-    if (this._popupWindow === this._popupNewPlace) {
-      this._popupInputNewPlacePic = document.querySelector(
-        "#popup__input_new-place-pic"
-      ).value;
-      this._popupInputnewPlaceTitle = document.querySelector(
-        "#popup__input_new-place-title"
-      ).value;
-    }
-    if (this._popupWindow === this._popupProfilePic) {
-      this._popupInputProfilePic = document.querySelector(
-        "#popup__input_profile-pic"
-      ).value;
-    }
+  _setInputValues() {
+    document.querySelector("#popup__input_name").value =
+      document.querySelector(".profile__name").textContent;
+    document.querySelector("#popup__input_about-me").value =
+      document.querySelector(".profile__about-me").textContent;
   }
 
   _setEventListeners() {
+    super._setEventListeners();
     this._popupWindow.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._getInputValues();
       this._popupWindow.querySelector(".popup__save-btn").textContent =
         "Guardando...";
-
-      if (this._popupWindow === this._popupNewPlace) {
-        this._apiHandler
-          .setNewPlace(this)
-          .then((data) => {
-            const dataArray = [data];
-            this._newCard.addItem(dataArray);
-            this._newCard.renderItems();
-          })
-          .catch((err) => console.log(err))
-          .finally((data) => {
-            this._closePopup();
-            this._popupWindow.querySelector(".popup__save-btn").textContent =
-              "Crear";
-          });
-      }
-
-      if (this._popupWindow === this._popupProfile) {
-        const profileName = document.querySelector(".profile__name");
-        const profileAboutMe = document.querySelector(".profile__about-me");
-        profileName.textContent = this._userInfo.name;
-        profileAboutMe.textContent = this._userInfo.about;
-        this._apiHandler
-          .changeUserInfo(this)
-          .catch((err) => console.log(err))
-          .finally((data) => {
-            this._closePopup();
-            this._popupWindow.querySelector(".popup__save-btn").textContent =
-              "Guardar";
-          });
-      }
-
-      if (this._popupWindow === this._popupProfilePic) {
-        const profilePic = document.querySelector(".profile__pic");
-        this._apiHandler
-          .setProfilePic(this._popupInputProfilePic)
-          .then(
-            (data) => (profilePic.style.backgroundImage = `url(${data.avatar})`)
-          )
-          .catch((err) => console.log(err))
-          .finally((data) => {
-            this._closePopup();
-            this._popupWindow.querySelector(".popup__save-btn").textContent =
-              "Guardar";
-          });
-      }
+      this._onSubmit(this._getInputValues());
     });
-    super._setEventListeners();
   }
 
   _closePopup() {
