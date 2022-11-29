@@ -10,18 +10,11 @@ import { newFormValidator } from "../components/FormValidator.js";
 import "../vendor/normalize.css";
 import "./index.css";
 
-const userInfo = apiHandler
-  .getUserInfo()
-  .then((data) => new UserInfo(data, apiHandler))
-  .catch((err) => console.error(err));
-
-const userId = userInfo
-  .then((userInfoObj) => userInfoObj.getUserInfo())
-  .then((userInfo) => userInfo._id);
+let userInfo = {};
 
 const cardRenderer = function (data) {
   const newCard = new Card(
-    userId,
+    userInfo,
     apiHandler,
     popUpEraseCard,
     popupWithImage,
@@ -37,61 +30,35 @@ const section = new Section(
 );
 
 const handleNewPlaceSubmit = function (data) {
-  apiHandler
+  return apiHandler
     .setNewPlace(data)
     .then((data) => {
       const dataArray = [data];
       section.addItem(dataArray);
       section.renderItems();
-      this._closePopup();
     })
-    .catch((err) => console.error(err))
-    .finally(() => {
-      this._popupWindow.querySelector(".popup__save-btn").textContent = "Crear";
-    });
+    .catch((err) => console.error(err));
 };
 
 const handleProfilePicSubmit = function (data) {
-  apiHandler
-    .setProfilePic(data)
-    .then((data) => {
-      document.querySelector(
-        ".profile__pic"
-      ).style.backgroundImage = `url(${data.avatar})`;
-      this._closePopup();
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      this._popupWindow.querySelector(".popup__save-btn").textContent =
-        "Guardar";
-    });
+  userInfo.setUserInfo(data);
+  const newUserInfo = userInfo.getUserInfo();
+  document.querySelector(
+    ".profile__pic"
+  ).style.backgroundImage = `url(${newUserInfo.avatar})`;
+  return apiHandler.setProfilePic(data).catch((err) => console.log(err));
 };
 
 const handleProfileSubmit = function (data) {
-  userInfo
-    .then((userInfoObj) => userInfoObj.setUserInfo(data))
-    .then((data) => {
-      document.querySelector(".profile__name").textContent = data.name;
-      document.querySelector(".profile__about-me").textContent = data.about;
-    })
-    .catch((err) => console.error(err))
-    .finally(() => {
-      this._closePopup();
-      this._popupWindow.querySelector(".popup__save-btn").textContent = "Crear";
-    });
+  userInfo.setUserInfo(data);
+  const newUserInfo = userInfo.getUserInfo();
+  document.querySelector(".profile__name").textContent = newUserInfo.name;
+  document.querySelector(".profile__about-me").textContent = newUserInfo.about;
+  return apiHandler.changeUserInfo(data).catch((err) => console.error(err));
 };
 
-const handleEraseCard = function () {
-  apiHandler
-    .deleteCard(this._card.id)
-    .then(() => {
-      this._card.remove();
-      this._closePopup();
-      this._popupEraseCardSelector.querySelector(
-        ".popup__save-btn"
-      ).textContent = "Sí";
-    })
-    .catch((err) => console.log(err));
+const handleEraseCard = function (cardId) {
+  return apiHandler.deleteCard(cardId).catch((err) => console.log(err));
 };
 
 const popupNewPlace = new PopupWithForms(
@@ -117,6 +84,7 @@ const popUpEraseCard = new PopupWithConfirmation(
 
 document.querySelector(".profile__edit-btn").addEventListener("click", () => {
   popupProfile.openPopup();
+  popupProfile.setInputValues(userInfo.getUserInfo());
 });
 
 document.querySelector(".profile__add-btn").addEventListener("click", () => {
@@ -128,18 +96,18 @@ document.querySelector(".profile__pic").addEventListener("click", () => {
 });
 
 const init = function () {
-  Promise.all([
-    apiHandler.getInitialCards(),
-    userInfo.then((userInfoObj) => userInfoObj.getUserInfo()),
-  ]).then(([cards, userInfo]) => {
-    document.querySelector(".profile__name").textContent = userInfo.name;
-    document.querySelector(".profile__about-me").textContent = userInfo.about;
-    document.querySelector(
-      ".profile__pic"
-    ).style.backgroundImage = `url(${userInfo.avatar})`;
-    section.addItem(cards);
-    section.renderItems();
-  });
+  return Promise.all([apiHandler.getInitialCards(), apiHandler.getUserInfo()])
+    .then(([cards, userData]) => {
+      userInfo = new UserInfo(userData);
+      document.querySelector(".profile__name").textContent = userData.name;
+      document.querySelector(".profile__about-me").textContent = userData.about;
+      document.querySelector(
+        ".profile__pic"
+      ).style.backgroundImage = `url(${userData.avatar})`;
+      section.addItem(cards);
+      section.renderItems();
+    })
+    .catch((err) => console.error(err));
 };
 
 init();

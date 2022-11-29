@@ -1,12 +1,12 @@
 export class Card {
   constructor(
-    userId,
+    userInfo,
     apiHandler,
     popupWithConfirmation,
     popupWithImage,
     template
   ) {
-    this._userId = userId;
+    this._userId = userInfo.getUserInfo()._id;
     this._apiHandler = apiHandler;
     this._popupWithConfirmation = popupWithConfirmation;
     this._popupWithImage = popupWithImage;
@@ -32,24 +32,20 @@ export class Card {
   }
 
   _handleLike() {
-    this._userId.then((userId) => {
-      this._data.likes.forEach((like) => {
-        if (like._id === userId) {
-          this._likeBtn.classList.add("cards__like-btn_active");
-          this.isLiked = true;
-        }
-      });
+    this._data.likes.forEach((like) => {
+      if (like._id === this._userId) {
+        this._likeBtn.classList.add("cards__like-btn_active");
+        this.isLiked = true;
+      }
     });
   }
 
   _addEventListeners() {
-    this._userId.then((userId) => {
-      if (userId !== this._data.owner._id)
-        this._trashBtn.style.display = "none";
-      this._trashBtn.addEventListener("click", (e) =>
-        this._popupWithConfirmation.openPopup(e.target)
-      );
-    });
+    if (this._userId !== this._data.owner._id)
+      this._trashBtn.style.display = "none";
+    this._trashBtn.addEventListener("click", (e) =>
+      this._popupWithConfirmation.openPopup(e.target)
+    );
 
     this._likeBtn.addEventListener("click", (e) => {
       this._apiHandler
@@ -65,7 +61,13 @@ export class Card {
           e.target.classList.toggle("cards__like-btn_active");
           this.isLiked = !this.isLiked;
         })
-        .catch((error) => console.error(error));
+        .catch((err) => console.error(err));
     });
+
+    this.cardElement
+      .querySelector(".cards__img")
+      .addEventListener("click", (e) => {
+        this._popupWithImage.openPopup(this._data);
+      });
   }
 }

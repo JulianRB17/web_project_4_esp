@@ -8,19 +8,14 @@ export class PopupWithImage extends Popup {
     this._setEventListeners();
   }
 
-  openPopup() {
+  openPopup({ name, link }) {
     super.openPopup();
-    this._popupImg.src = this._img.src;
-    this._popupImg.alt = this._img.alt;
-    this._caption.textContent = this._img.alt;
+    this._popupImg.src = link;
+    this._popupImg.alt = name;
+    this._caption.textContent = name;
   }
 
   _setEventListeners() {
     super._setEventListeners();
-    document.querySelector(".cards").addEventListener("click", (e) => {
-      this._img = e.target.closest(".cards__img");
-      if (!this._img) return;
-      this.openPopup();
-    });
   }
 }

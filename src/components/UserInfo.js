@@ -1,9 +1,8 @@
 export class UserInfo {
-  constructor({ name, about, avatar, _id }, apiHandler) {
+  constructor({ name, about, avatar, _id }) {
     this._name = name;
     this._about = about;
     this._avatar = avatar;
-    this._apiHandler = apiHandler;
     this._id = _id;
   }
 
@@ -16,13 +15,10 @@ export class UserInfo {
     };
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about, avatar, _id }) {
     this._name = name;
     this._about = about;
-
-    return this._apiHandler.changeUserInfo({
-      name: this._name,
-      about: this._about,
-    });
+    this._avatar = avatar;
+    this._id = _id;
   }
 }

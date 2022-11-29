@@ -17,7 +17,7 @@ class Api {
         if (res.ok) return res.json();
         return Promise.reject(`Error: ${res.status}`);
       })
-      .catch((error) => console.error(error));
+      .catch((err) => console.error(err));
   }
 
   getUserInfo() {
